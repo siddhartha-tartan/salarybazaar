@@ -22,6 +22,14 @@ interface SidebarProps {
   currentRole?: UserRole;
 }
 
+interface NavigationItem {
+  id: string;
+  label: string;
+  icon: React.ReactNode;
+  showPulse?: boolean;
+  badge?: string | number;
+}
+
 export const Sidebar: React.FC<SidebarProps> = ({ 
   user, 
   onLogout, 
@@ -30,7 +38,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   currentRole = 'employee'
 }) => {
   // Define navigation items based on role
-  const getNavigationItems = () => {
+  const getNavigationItems = (): NavigationItem[] => {
     switch (currentRole) {
       case 'employee':
         return [
@@ -292,16 +300,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
               Settings
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={onLogout} className="text-red-600 dark:text-red-400">
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-              </svg>
-              Logout
-            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
     </aside>
   );
 };
-

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Login } from "./components/Login";
 import { Dashboard } from "./components/Dashboard";
 import { Orders } from "./components/Orders";
 import { HR } from "./components/HR";
@@ -10,11 +9,6 @@ import { RoleProvider, useRole } from "./contexts/RoleContext";
 
 function AppContent() {
   const { currentRole } = useRole();
-  
-  // Persist authentication in localStorage
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    return localStorage.getItem('isAuthenticated') === 'true';
-  });
   
   const [currentPage, setCurrentPage] = useState<string>(() => {
     const hash = window.location.hash.slice(1);
@@ -52,12 +46,8 @@ function AppContent() {
   useEffect(() => {
     if (currentRole === 'hr') {
       setCurrentPage('overview');
-      setIsAuthenticated(true);
-      localStorage.setItem('isAuthenticated', 'true');
     } else if (currentRole === 'crm') {
       setCurrentPage('dashboard');
-      setIsAuthenticated(true);
-      localStorage.setItem('isAuthenticated', 'true');
     } else if (currentRole === 'employee') {
       const savedPage = localStorage.getItem('currentPage');
       setCurrentPage(savedPage || 'dashboard');
@@ -71,16 +61,8 @@ function AppContent() {
     }
   }, [currentPage, currentRole]);
 
-  const handleLogin = () => {
-    setIsAuthenticated(true);
-    localStorage.setItem('isAuthenticated', 'true');
-    setCurrentPage('dashboard');
-    window.location.hash = 'dashboard';
-  };
-
   const handleLogout = () => {
-    setIsAuthenticated(false);
-    localStorage.removeItem('isAuthenticated');
+    // No-op since login is removed
     if (currentRole === 'employee') {
       setCurrentPage('dashboard');
     }
@@ -96,11 +78,6 @@ function AppContent() {
   // Public Links page (accessible via #links or #link)
   if (currentHash === 'links' || currentHash === 'link') {
     return <Links />;
-  }
-
-  // Employee Interface - requires login
-  if (currentRole === 'employee' && !isAuthenticated) {
-    return <Login onLogin={handleLogin} />;
   }
 
   // Render based on current role
@@ -131,5 +108,3 @@ export function App() {
     </RoleProvider>
   );
 }
-
-
