@@ -36,11 +36,11 @@ export const Login: React.FC<LoginProps> = ({ onLogin }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-primary/10 to-primary/5 dark:from-gray-900 dark:to-gray-800">
       <div className="flex min-h-screen">
         {/* Left Side - Geographic Image/Illustration */}
         <div className="hidden lg:flex lg:w-1/2 xl:w-3/5 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--primary))] to-blue-700">
+          <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--primary))] to-primary">
             <div className="absolute inset-0 bg-black/20"></div>
             {/* Geometric patterns */}
             <div className="absolute top-20 left-20 w-32 h-32 rounded-full border-2 border-white/30"></div>
@@ -51,7 +51,7 @@ export const Login: React.FC<LoginProps> = ({ onLogin }) => {
             {/* Content overlay */}
             <div className="relative z-10 flex flex-col justify-center h-full px-16 text-white">
               <div className="max-w-lg">
-                <h1 className="text-5xl font-bold leading-tight mb-6">
+                <h1 className="text-5xl font-bold leading-tight mb-6 text-white">
                   Your Financial Wellness Partner
                 </h1>
                 <p className="text-xl text-blue-100 mb-8 leading-relaxed">
@@ -178,8 +178,8 @@ export const Login: React.FC<LoginProps> = ({ onLogin }) => {
               <div className="mt-12 text-center">
                 <p className="text-sm text-muted-foreground">
                   Powered by{" "}
-                  <span className="font-semibold text-primary">HDFC Bank</span>{" "}
-                  & <span className="font-semibold text-blue-700">Tartan</span>
+                  <span className="font-semibold text-primary">Kotak811</span>{" "}
+                  & <span className="font-semibold text-primary/80">Tartan</span>
                 </p>
               </div>
             </div>

@@ -27,7 +27,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
   };
 
   return (
-    <div className="flex h-screen overflow-hidden bg-gradient-to-br from-blue-50/50 via-white to-indigo-50/50 dark:from-gray-900 dark:to-gray-800">
+    <div className="flex h-screen overflow-hidden bg-gradient-to-br from-[hsl(var(--background))] via-white to-[hsl(var(--accent))]/20 dark:from-gray-900 dark:to-gray-800">
       {/* Sidebar */}
       <Sidebar 
         user={userData} 

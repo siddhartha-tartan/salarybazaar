@@ -1,12 +1,12 @@
-# CRM Portal - Relationship Manager Dashboard
+# Kotak811 for Corporates - Relationship Manager Dashboard
 
 ## Overview
-The CRM Portal is a comprehensive module designed for Relationship Managers to manage corporate clients, configure product eligibility rules, and gain insights through AI-powered analytics.
+Kotak811 for Corporates is a comprehensive module designed for Relationship Managers to manage corporate clients, configure product eligibility rules, and gain insights through AI-powered analytics.
 
-## Accessing the CRM Portal
+## Accessing Kotak811 for Corporates
 Navigate to: **`/#crm`**
 
-The CRM portal is a separate, independent module with its own authentication (auto-authenticated for demo purposes).
+Kotak811 for Corporates is a separate, independent module with its own authentication (auto-authenticated for demo purposes).
 
 ## Features
 
@@ -242,7 +242,7 @@ Each query returns intelligent insights such as:
 ## Design Philosophy
 
 ### Independent Module
-The CRM portal is completely independent from:
+Kotak811 for Corporates is completely independent from:
 - Employee Dashboard
 - HR Portal
 - Agent interfaces
@@ -399,7 +399,7 @@ const [isAnalyzing, setIsAnalyzing] = useState(false);
 
 ## Support & Contact
 
-For technical issues or feature requests regarding the CRM portal:
+For technical issues or feature requests regarding Kotak811 for Corporates:
 - Refer to the main project documentation
 - Contact development team
 - Submit feature requests through project management system

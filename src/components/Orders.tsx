@@ -18,7 +18,7 @@ export const Orders: React.FC<OrdersProps> = ({ onLogout, onNavigate }) => {
     {
       id: 1,
       type: 'Credit Card',
-      name: 'HDFC Regalia Gold',
+      name: '811 Super Credit Card',
       icon: '💳',
       activatedDate: '12 Aug 2024',
       details: [
@@ -31,31 +31,31 @@ export const Orders: React.FC<OrdersProps> = ({ onLogout, onNavigate }) => {
     },
     {
       id: 2,
-      type: 'Travel Insurance',
-      name: 'International Travel Cover',
-      icon: '✈️',
+      type: 'Insurance',
+      name: 'Kotak 811 Health',
+      icon: '🏥',
       activatedDate: '28 Sep 2024',
       details: [
         { label: 'Policy Number', value: 'TRV2024092801' },
         { label: 'Coverage', value: '₹10,00,000' },
         { label: 'Valid Until', value: '28 Oct 2024' },
-        { label: 'Destinations', value: 'Europe (Schengen)' },
+        { label: 'Type', value: 'Health & Accident' },
       ],
       actions: ['Download Policy', 'Claim Status', 'Extend Coverage']
     },
     {
       id: 3,
-      type: 'Fixed Deposit',
-      name: 'Tax Saving FD',
+      type: 'Wealth',
+      name: 'Kotak Wealth Advisory',
       icon: '💎',
       activatedDate: '01 Apr 2024',
       details: [
-        { label: 'FD Number', value: 'FD240401789' },
-        { label: 'Amount', value: '₹1,50,000' },
-        { label: 'Interest Rate', value: '7.5% p.a.' },
-        { label: 'Maturity Date', value: '01 Apr 2029' },
+        { label: 'Ref Number', value: 'FD240401789' },
+        { label: 'Portfolio', value: '₹1,50,000' },
+        { label: 'Returns', value: '12.5% p.a.' },
+        { label: 'Goal', value: 'Retirement' },
       ],
-      actions: ['Download Certificate', 'View Interest', 'Nomination']
+      actions: ['View Portfolio', 'Invest More', 'Advisory Call']
     }
   ];
 
@@ -64,7 +64,7 @@ export const Orders: React.FC<OrdersProps> = ({ onLogout, onNavigate }) => {
     {
       id: 1,
       type: 'Personal Loan',
-      name: '₹10L Personal Loan Application',
+      name: 'Kotak 811 Personal Loan Application',
       icon: '💰',
       appliedDate: '15 Sep 2024',
       status: 'Under Review',

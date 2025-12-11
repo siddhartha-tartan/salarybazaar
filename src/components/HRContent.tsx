@@ -95,11 +95,11 @@ export const HRContent: React.FC<HRContentProps> = ({ activeTab, onTabChange }) 
       const joiningDate = new Date(2015 + Math.floor(Math.random() * 9), Math.floor(Math.random() * 12), Math.floor(Math.random() * 28) + 1);
       
       const activeProductsList = [
-        products >= 1 ? 'Group Health Insurance' : null,
-        products >= 2 ? 'Premium Credit Cards' : null,
-        products >= 3 ? 'Personal Loans' : null,
-        products >= 4 ? 'Tax Saving FD' : null,
-        products >= 5 ? 'Home Loan' : null,
+        products >= 1 ? 'Kotak 811 Salary Account' : null,
+        products >= 2 ? 'Kotak 811 Debit Card' : null,
+        products >= 3 ? 'Kotak 811 Personal Loan' : null,
+        products >= 4 ? '811 Super Credit Card' : null,
+        products >= 5 ? 'Kotak 811 Health' : null,
       ].filter(Boolean);
       
       employees.push({
@@ -132,59 +132,59 @@ export const HRContent: React.FC<HRContentProps> = ({ activeTab, onTabChange }) 
   const [benefits, setBenefits] = useState([
     {
       id: 1,
-      name: 'Pre-approved Personal Loans',
-      description: 'Instant personal loans up to 20x monthly salary',
+      name: 'Kotak 811 Salary Account',
+      description: 'Zero-balance digital salary account with full mobile banking.',
+      category: 'Accounts',
+      enabled: true,
+      eligibility: 'Kotak 811 salary credit for 3 months',
+      utilizationRate: 62,
+      totalUsers: 780
+    },
+    {
+      id: 2,
+      name: 'Kotak 811 Personal Loan',
+      description: 'Instant, paperless personal loan for salaried employees.',
       category: 'Loans',
       enabled: true,
-      eligibility: 'Min 6 months tenure',
+      eligibility: 'Active Kotak 811 salary account',
       utilizationRate: 45,
       totalUsers: 562
     },
     {
-      id: 2,
-      name: 'Premium Credit Cards',
-      description: 'Lifetime free credit cards with rewards',
+      id: 3,
+      name: '811 Super Credit Card',
+      description: 'Lifetime-free secured credit card to build credit.',
       category: 'Cards',
       enabled: true,
-      eligibility: 'All employees',
+      eligibility: 'Kotak 811 salary credit and minimum vintage',
       utilizationRate: 68,
       totalUsers: 847
     },
     {
-      id: 3,
-      name: 'Group Health Insurance',
-      description: 'Comprehensive health coverage for family',
-      category: 'Insurance',
+      id: 4,
+      name: 'Kotak 811 Health',
+      description: 'Health and accident cover linked to Kotak accounts.',
+      category: 'Benefits',
       enabled: true,
-      eligibility: 'All employees',
+      eligibility: 'All full-time employees',
       utilizationRate: 89,
       totalUsers: 1109
     },
     {
-      id: 4,
-      name: 'Tax Saving FD',
-      description: 'Fixed deposits with tax benefits under 80C',
-      category: 'Savings',
+      id: 5,
+      name: 'Kotak Wealth Advisory',
+      description: 'Investment plans, SIPs, and goal-based advisory.',
+      category: 'Wealth',
       enabled: true,
-      eligibility: 'Min 3 months tenure',
+      eligibility: 'Employees eligible for reimbursements',
       utilizationRate: 34,
       totalUsers: 424
     },
     {
-      id: 5,
-      name: 'Home Loan Benefits',
-      description: 'Special interest rates for home loans',
-      category: 'Loans',
-      enabled: true,
-      eligibility: 'Min 1 year tenure',
-      utilizationRate: 12,
-      totalUsers: 150
-    },
-    {
       id: 6,
-      name: 'Travel Insurance',
-      description: 'International and domestic travel cover',
-      category: 'Insurance',
+      name: 'Kotak 811 Debit Card',
+      description: 'Virtual + physical card for daily spends.',
+      category: 'Cards',
       enabled: false,
       eligibility: 'All employees',
       utilizationRate: 0,
@@ -736,11 +736,11 @@ export const HRContent: React.FC<HRContentProps> = ({ activeTab, onTabChange }) 
                </div>
                <div className="space-y-4">
                  {[
-                   { name: 'Group Insurance', value: 89, employees: 1109, color: 'bg-green-500' },
-                   { name: 'Credit Cards', value: 68, employees: 847, color: 'bg-blue-500' },
-                   { name: 'Personal Loans', value: 45, employees: 562, color: 'bg-purple-500' },
-                   { name: 'Tax Saving FD', value: 34, employees: 424, color: 'bg-orange-500' },
-                   { name: 'Home Loans', value: 12, employees: 150, color: 'bg-pink-500' },
+                   { name: 'Kotak 811 Salary Account', value: 62, employees: 780, color: 'bg-blue-500' },
+                   { name: '811 Super Credit Card', value: 68, employees: 847, color: 'bg-purple-500' },
+                   { name: 'Kotak 811 Personal Loan', value: 45, employees: 562, color: 'bg-emerald-500' },
+                   { name: 'Kotak 811 Health', value: 89, employees: 1109, color: 'bg-orange-500' },
+                   { name: 'Kotak Wealth Advisory', value: 34, employees: 424, color: 'bg-pink-500' },
                  ].map((item, idx) => (
                    <div key={idx}>
                      <div className="flex items-center justify-between text-sm mb-2">
@@ -764,10 +764,10 @@ export const HRContent: React.FC<HRContentProps> = ({ activeTab, onTabChange }) 
             <Card className="p-6">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Recent Activity</h3>
               <div className="space-y-3">
-                {[
+               {[
                  { action: '15 new employees onboarded', time: '2h ago', icon: Users },
-                 { action: 'Home loan approved for Rajesh K.', time: '5h ago', icon: Building2 },
-                 { action: 'Group insurance plan renewed', time: '1d ago', icon: CreditCard },
+                 { action: 'Kotak 811 salary account opened for Rajesh K.', time: '5h ago', icon: Building2 },
+                 { action: 'Kotak Life benefit plan renewed for ACME Corp', time: '1d ago', icon: CreditCard },
                  { action: 'HRMS data synced successfully', time: '2d ago', icon: BarChart3 },
                ].map((activity, idx) => {
                  const Icon = activity.icon;

@@ -14,7 +14,7 @@
     font-family: 'Plus Jakarta Sans', sans-serif;
   }
   :root {
-    /* HDFC Bank Blue Gradient Theme */
+    /* Kotak811 Theme – built around #3857ff (primary) and #ff0049 (accent) */
     --background: 210 20% 98%;
     --foreground: 215 25% 15%;
 
@@ -24,33 +24,34 @@
     --popover: 0 0% 100%;
     --popover-foreground: 215 25% 15%;
 
-    /* HDFC Primary Blue */
-    --primary: 210 100% 27.5%;
+    /* Primary brand blue: #3857ff */
+    --primary: 231 100% 61%;
     --primary-foreground: 0 0% 100%;
 
-    /* HDFC Light Blue */
-    --secondary: 205 90% 95%;
-    --secondary-foreground: 210 100% 27.5%;
+    /* Soft blue secondary surfaces (stay light) */
+    --secondary: 231 100% 96%;
+    --secondary-foreground: 231 100% 30%;
 
     --muted: 210 25% 95%;
     --muted-foreground: 215 15% 45%;
 
-    --accent: 205 95% 92%;
-    --accent-foreground: 210 100% 27.5%;
+    /* Subtle accent tint based on #ff0049, still light for backgrounds */
+    --accent: 343 100% 96%;
+    --accent-foreground: 343 100% 50%; /* exact #ff0049 */
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 210 20% 90%;
     --input: 210 20% 90%;
-    --ring: 210 100% 27.5%;
+    --ring: 231 100% 61%;
 
-    /* HDFC Blue Gradient Charts */
-    --chart-1: 210 100% 27.5%;
-    --chart-2: 205 85% 45%;
-    --chart-3: 200 75% 55%;
-    --chart-4: 195 70% 65%;
-    --chart-5: 190 65% 75%;
+    /* Chart palette using brand blue + accent red */
+    --chart-1: 231 100% 61%; /* primary */
+    --chart-2: 231 100% 50%;
+    --chart-3: 343 100% 50%; /* accent */
+    --chart-4: 343 100% 60%;
+    --chart-5: 343 100% 70%;
 
     --radius: 0.75rem
   }
@@ -64,8 +65,8 @@
     --popover: 215 25% 12%;
     --popover-foreground: 210 20% 98%;
 
-    /* HDFC Blue in Dark Mode */
-    --primary: 205 95% 55%;
+    /* Kotak811 in Dark Mode – brighter blue on dark */
+    --primary: 231 100% 70%;
     --primary-foreground: 215 30% 8%;
 
     --secondary: 215 25% 18%;
@@ -92,4 +93,47 @@
   }
 }
 
-
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  .animate-pulse-slow {
+    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  .animate-blob {
+    animation: blob 7s infinite;
+  }
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+  
+  @keyframes blob {
+    0% {
+      transform: translate(0px, 0px) scale(1);
+    }
+    33% {
+      transform: translate(30px, -50px) scale(1.1);
+    }
+    66% {
+      transform: translate(-20px, 20px) scale(0.9);
+    }
+    100% {
+      transform: translate(0px, 0px) scale(1);
+    }
+  }
+}

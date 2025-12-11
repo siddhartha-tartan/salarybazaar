@@ -1,6 +1,6 @@
-# Employee Financial Wellness Platform
+# Kotak811 for enterprises
 
-A corporate-branded, unified digital hub where employees can access banking and financial services seamlessly within their work ecosystem. Built for **HDFC Bank + Tartan** partnership.
+A corporate-branded, unified digital hub where employees can access banking and financial services seamlessly within their work ecosystem. Built for **Kotak811 + Tartan** partnership.
 
 ## 🎯 Overview
 
@@ -65,7 +65,7 @@ The app will start on `http://localhost:5173`
 - **Framework**: React + TypeScript + Vite
 - **Styling**: Tailwind CSS + shadcn/ui
 - **Font**: Plus Jakarta Sans
-- **Colors**: HDFC Bank Blue gradient theme
+- **Colors**: Kotak811 theme
 - **Components**: shadcn/ui (Button, Card, Badge, Input, etc.)
 
 ## 📂 Project Structure
@@ -80,7 +80,7 @@ src/
 │   ├── ui/                       # shadcn/ui components
 │   └── dashboard/                # Dashboard components
 ├── App.tsx                       # Main app router
-├── index.css                     # Global styles + HDFC theme
+├── index.css                     # Global styles + Kotak811 theme
 └── main.tsx                      # Entry point
 ```
 
@@ -131,4 +131,4 @@ See `PROJECT_DIRECTIONS.md` for comprehensive documentation including:
 
 ---
 
-**Built with ❤️ for HDFC Bank x Tartan**
+**Built with ❤️ for Kotak811 x Tartan**

@@ -8,6 +8,7 @@ interface FinancialHealthCardProps {
 
 export const FinancialHealthCard: React.FC<FinancialHealthCardProps> = ({ score, salary, tenure }) => {
   const getScoreColor = (score: number) => {
+    // Keep semantic colors (green/yellow/red) for health, independent of brand
     if (score >= 80) return { from: 'from-green-400', to: 'to-emerald-500', text: 'text-green-600', bg: 'bg-green-50', ring: 'ring-green-200' };
     if (score >= 60) return { from: 'from-yellow-400', to: 'to-orange-500', text: 'text-orange-600', bg: 'bg-orange-50', ring: 'ring-orange-200' };
     return { from: 'from-red-400', to: 'to-pink-500', text: 'text-red-600', bg: 'bg-red-50', ring: 'ring-red-200' };
@@ -22,9 +23,9 @@ export const FinancialHealthCard: React.FC<FinancialHealthCardProps> = ({ score,
   const colors = getScoreColor(score);
 
   return (
-    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-white to-blue-50/50 dark:from-gray-800 dark:to-gray-800/50 border border-blue-100 dark:border-gray-700 p-6">
+    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-white to-[hsl(var(--primary))]/5 dark:from-gray-800 dark:to-gray-800/50 border border-primary/20 dark:border-gray-700 p-6">
       {/* Background Pattern */}
-      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-100 to-transparent rounded-bl-full opacity-30"></div>
+      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[hsl(var(--primary))]/20 to-transparent rounded-bl-full opacity-30"></div>
       
       <div className="relative">
         <div className="flex items-start justify-between mb-6">
@@ -88,8 +89,8 @@ export const FinancialHealthCard: React.FC<FinancialHealthCardProps> = ({ score,
         </div>
 
         {/* Benefits */}
-        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-3 border border-blue-100 dark:border-blue-800">
-          <p className="text-xs font-semibold text-blue-900 dark:text-blue-300 mb-2">🎯 Your Benefits</p>
+        <div className="bg-gradient-to-r from-[hsl(var(--primary))]/8 to-[hsl(var(--primary))]/16 dark:from-primary/20 dark:to-primary/40 rounded-xl p-3 border border-primary/20 dark:border-primary/60">
+          <p className="text-xs font-semibold text-primary mb-2">🎯 Your Benefits</p>
           <div className="flex flex-wrap gap-1.5">
             <span className="px-2 py-1 bg-white/80 dark:bg-gray-700/80 rounded-full text-xs font-medium">
               Pre-approved loans

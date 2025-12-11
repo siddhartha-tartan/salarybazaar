@@ -38,7 +38,7 @@ export const AIAgentSidebar: React.FC<AIAgentSidebarProps> = ({ userName, salary
           '📊 Health score detected: 78/100 (Good)',
           '💰 Annual income verified: ₹8.5L',
           '📅 Employment tenure: 3.5 years',
-          '🏦 Checking HDFC rate database...',
+          '🏦 Checking Kotak811 rate database...',
           '🎯 Cross-referencing with employee benefits...',
           '✨ Calculating personalized rate...'
         ],
@@ -119,7 +119,7 @@ export const AIAgentSidebar: React.FC<AIAgentSidebarProps> = ({ userName, salary
           '📊 Analyzing current market conditions...',
           '🎯 Assessing your risk profile: Moderate',
           '💹 Comparing FD vs Debt Funds vs Liquid Funds...',
-          '🏦 HDFC FD rate: 7.5% p.a.',
+          '🏦 Kotak811 FD rate: 7.5% p.a.',
           '📈 Debt funds: 6-8% returns',
           '💰 Factoring in liquidity needs...',
           '✅ Best option identified'
@@ -216,7 +216,7 @@ export const AIAgentSidebar: React.FC<AIAgentSidebarProps> = ({ userName, salary
       {/* Single Unified Agent Card */}
       <Card className="h-full flex flex-col overflow-hidden border border-gray-200 dark:border-gray-700 shadow-sm rounded-lg">
         {/* Agent Header - Integrated into card */}
-        <div className="bg-primary text-white p-5 border-b border-blue-600">
+        <div className="bg-primary text-white p-5 border-b border-primary/80">
           <div className="flex items-center space-x-3">
             <div className="relative">
               <div className="w-10 h-10 bg-white/20 backdrop-blur rounded-lg flex items-center justify-center">
@@ -226,7 +226,7 @@ export const AIAgentSidebar: React.FC<AIAgentSidebarProps> = ({ userName, salary
             </div>
             <div className="flex-1">
               <h3 className="font-bold text-base">FinAgent</h3>
-              <p className="text-xs text-blue-100">Your AI Financial Agent</p>
+              <p className="text-xs text-primary/20">Your AI Financial Agent</p>
             </div>
           </div>
         </div>
@@ -240,7 +240,7 @@ export const AIAgentSidebar: React.FC<AIAgentSidebarProps> = ({ userName, salary
                 <button
                   key={idx}
                   onClick={() => handleSmartAction(action as any)}
-                  className="group bg-white dark:bg-gray-800 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg p-3 text-left transition-all border border-gray-200 dark:border-gray-700 hover:border-blue-300 shadow-sm"
+                  className="group bg-white dark:bg-gray-800 hover:bg-primary/5 dark:hover:bg-gray-700 rounded-lg p-3 text-left transition-all border border-gray-200 dark:border-gray-700 hover:border-primary/70 shadow-sm"
                 >
                   <div className="mb-1">
                     {(action as any).Icon ? (
@@ -283,7 +283,7 @@ export const AIAgentSidebar: React.FC<AIAgentSidebarProps> = ({ userName, salary
 
                 {msg.type === 'thinking' && msg.steps && (
                   <div className="flex justify-start">
-                    <div className="max-w-[90%] bg-blue-50 dark:bg-gray-800 rounded-2xl rounded-tl-sm px-4 py-3 border border-blue-100 dark:border-gray-700 shadow-sm">
+                    <div className="max-w-[90%] bg-primary/5 dark:bg-gray-800 rounded-2xl rounded-tl-sm px-4 py-3 border border-primary/20 dark:border-gray-700 shadow-sm">
                       <div className="flex items-center space-x-2 mb-2">
                         <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
                         <span className="text-xs font-semibold text-primary">Thinking...</span>

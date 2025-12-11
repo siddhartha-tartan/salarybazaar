@@ -147,9 +147,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
   };
 
   const navigationItems = getNavigationItems();
-  const portalName = currentRole === 'employee' ? 'Employee Portal' : 
-                      currentRole === 'hr' ? 'HR Portal' : 
-                      'Relationship Manager Portal';
 
   return (
     <aside className="w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col h-screen sticky top-0">
@@ -163,19 +160,23 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* Platform Brand */}
         <div className="flex items-center space-x-3 group cursor-pointer">
           <div className="relative">
-            {/* Logo with gradient and animation */}
-            <div className="w-9 h-9 bg-gradient-to-br from-[hsl(var(--primary))] via-blue-600 to-indigo-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-primary/20 transition-all duration-300 group-hover:shadow-primary/30 group-hover:scale-105">
+            {/* Logo - single accent color #ff0049 */}
+            <div className="w-9 h-9 bg-[#ff0049] rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-[#ff0049]/40 transition-all duration-300 group-hover:shadow-[#ff0049]/60 group-hover:scale-105">
               <svg className="w-5 h-5 text-white transition-transform duration-300 group-hover:rotate-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
               </svg>
             </div>
             {/* Animated ring on hover */}
-            <div className="absolute inset-0 rounded-xl border-2 border-primary/0 group-hover:border-primary/20 transition-all duration-300 group-hover:scale-110"></div>
+            <div className="absolute inset-0 rounded-xl border-2 border-[#ff0049]/0 group-hover:border-[#ff0049]/30 transition-all duration-300 group-hover:scale-110"></div>
           </div>
           <div className="flex-1 min-w-0">
-            <h1 className="text-xs font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent leading-tight transition-all duration-300">Employee Connect Pro</h1>
+            <h1 className="text-xs font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent leading-tight transition-all duration-300">
+              {currentRole === 'crm' ? 'Kotak811 for Corporates' : 'Kotak811 for enterprises'}
+            </h1>
             {currentRole !== 'crm' && (
-              <p className="text-[11px] text-gray-500 dark:text-gray-400 truncate mt-0.5 transition-colors duration-200 group-hover:text-gray-600 dark:group-hover:text-gray-300">{user.company}</p>
+              <p className="text-[11px] text-gray-500 dark:text-gray-400 truncate mt-0.5 transition-colors duration-200 group-hover:text-gray-600 dark:group-hover:text-gray-300">
+                {user.company}
+              </p>
             )}
           </div>
         </div>
@@ -251,7 +252,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <DropdownMenuTrigger asChild>
             <button className="group w-full flex items-center space-x-3 px-4 py-2.5 hover:bg-gradient-to-r hover:from-gray-100/50 hover:to-transparent dark:hover:from-gray-700/50 rounded-xl transition-all duration-200 relative overflow-hidden">
               <div className="relative z-10">
-                <div className="w-9 h-9 bg-gradient-to-br from-[hsl(var(--primary))] to-blue-700 rounded-full flex items-center justify-center text-white font-semibold text-sm flex-shrink-0 shadow-lg shadow-primary/20 transition-all duration-200 group-hover:scale-110 group-hover:shadow-primary/30">
+                <div className="w-9 h-9 bg-gradient-to-br from-[hsl(var(--primary))] to-[#1b34c9] rounded-full flex items-center justify-center text-white font-semibold text-sm flex-shrink-0 shadow-lg shadow-primary/20 transition-all duration-200 group-hover:scale-110 group-hover:shadow-primary/30">
                   {user.name.split(' ').map(n => n[0]).join('')}
                 </div>
                 {/* Status indicator */}

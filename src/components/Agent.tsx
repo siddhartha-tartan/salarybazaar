@@ -67,7 +67,7 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
       icon: '🏦',
       description: 'Complete digital account opening',
       keywords: ['bank account', 'savings account', 'open account', 'new account', 'account opening', 'salary account'],
-      color: 'from-blue-500 to-indigo-600'
+      color: 'from-primary to-primary/80'
     },
     {
       id: 'personal-loan',
@@ -313,15 +313,15 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
         highlight: '₹15,00,000',
         details: [
           { icon: '💰', label: 'Loan Amount', value: 'Up to ₹15L' },
-          { icon: '📊', label: 'Interest Rate', value: '10.5% p.a. (indicative)' },
+          { icon: '📊', label: 'Interest Rate', value: '10.99% p.a. (indicative)' },
           { icon: '📅', label: 'Tenure', value: '12-60 months' },
-          { icon: '💳', label: 'Processing Fee', value: '₹0 (Corporate offer)' },
-          { icon: '⚡', label: 'Disbursal', value: 'Within 24 hours' }
+          { icon: '💳', label: 'Processing Fee', value: '₹999 (Corporate offer)' },
+          { icon: '⚡', label: 'Disbursal', value: 'Instant Disbursal' }
         ],
         options: [
-          { label: '₹5L for 36 months', emi: '₹16,134/month' },
-          { label: '₹10L for 48 months', emi: '₹25,363/month' },
-          { label: '₹15L for 60 months', emi: '₹32,268/month' }
+          { label: '₹5L for 36 months', emi: '₹16,369/month' },
+          { label: '₹10L for 48 months', emi: '₹25,845/month' },
+          { label: '₹15L for 60 months', emi: '₹32,612/month' }
         ],
         action: 'select-loan'
       },
@@ -361,8 +361,8 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
       text: `Your salary account is pre-verified for instant disbursal:`,
       data: {
         fields: [
-          { label: 'Account', value: 'HDFC Salary Account (pre-verified)', verified: true },
-          { label: 'IFSC', value: 'HDFC0000001', verified: true }
+          { label: 'Account', value: 'Kotak811 Salary Account (pre-verified)', verified: true },
+          { label: 'IFSC', value: 'KKBK0000001', verified: true }
         ]
       },
       actions: [
@@ -392,7 +392,7 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
         title: 'Set up eNACH (Auto-debit for EMI)',
         subtitle: 'Avoid missed EMIs by setting up auto-debit mandate',
         items: [
-          { label: 'Recommended', value: 'HDFC Salary Account eNACH' },
+          { label: 'Recommended', value: 'Kotak811 Salary Account eNACH' },
           { label: 'Alternative', value: 'UPI eMandate' }
         ]
       },
@@ -433,7 +433,7 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
         fields: [
           { label: 'Selected Plan', value: selectedLoanOption || '—', verified: true },
           { label: 'eNACH Method', value: method === 'account' ? 'Salary Account eNACH' : 'UPI eMandate', verified: true },
-          { label: 'Disbursal Account', value: 'HDFC Salary Account', verified: true }
+          { label: 'Disbursal Account', value: 'Kotak811 Salary Account', verified: true }
         ],
         action: 'confirm-pl-submit'
       },
@@ -516,8 +516,8 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
         text: 'Confirm your disbursal account:',
         data: {
           fields: [
-            { label: 'Account', value: 'HDFC Salary Account (pre-verified)', verified: true },
-            { label: 'IFSC', value: 'HDFC0000001', verified: true }
+            { label: 'Account', value: 'Kotak811 Salary Account (pre-verified)', verified: true },
+            { label: 'IFSC', value: 'KKBK0000001', verified: true }
           ]
         },
         actions: [
@@ -985,7 +985,7 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
         applicationNumber: 'CC' + Date.now().toString().slice(-8),
         details: [
           'Status: Under Review',
-          'Card: Cashback Infinite',
+          'Card: Kotak811 Royale Signature',
           'Limit: ₹10L (subject to approval)',
           'Approval: 3-5 business days'
         ],
@@ -1368,7 +1368,7 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
 
     setIsThinking(true);
     await addThinkingSteps([
-      '🏦 Creating your HDFC account...',
+      '🏦 Creating your Kotak811 account...',
       '💳 Generating virtual debit card...',
       '🔐 Setting up UPI...',
       '✉️ Preparing account details...',
@@ -1388,15 +1388,15 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
     setMessages(prev => [...prev, {
       type: 'success',
       data: {
-        title: '🎉 Your HDFC Account is Live!',
+        title: '🎉 Your Kotak811 Account is Live!',
         accountNumber: accountNumber,
         details: [
           `Account Number: ${accountNumber}`,
-          'IFSC Code: HDFC0000001',
+          'IFSC Code: KKBK0000001',
           'Branch: MG Road, Bangalore',
           'Account Type: Savings Account',
           `Virtual Card: ${virtualCardNumber.slice(0, 4)} XXXX XXXX ${virtualCardNumber.slice(-4)}`,
-          'UPI ID: rahul@hdfcbank',
+          'UPI ID: rahul@kotak811',
           'Min Balance: ₹10,000 (MAB)',
           'Welcome Bonus: ₹500 on first txn'
         ],
@@ -1511,7 +1511,7 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
       data: {
         fields: [
           { label: 'Card Number', value: `${virtualCardNumber.slice(0, 4)} XXXX XXXX ${virtualCardNumber.slice(-4)}`, icon: '💳', verified: true },
-          { label: 'Card Type', value: 'HDFC Bank Visa Debit', icon: '💎', verified: true },
+          { label: 'Card Type', value: 'Kotak811 Visa Debit', icon: '💎', verified: true },
           { label: 'Valid Until', value: '12/2028', icon: '📅', verified: true },
           { label: 'Last 4 Digits', value: virtualCardNumber.slice(-4), icon: '🔢', verified: true }
         ]
@@ -1733,39 +1733,39 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
         highlight: 'Special offers for new customers',
         cardOptions: [
           {
-            name: 'HDFC Millennia Credit Card',
+            name: 'Kotak811 811 Super Credit Card',
             limit: '₹5L limit',
-            fee: '₹1,000/year (1st year free)',
+            fee: '₹500/year (1st year free)',
             benefits: [
               '5% cashback on Amazon, Flipkart',
               '2.5% cashback on all other spends',
-              '1000 reward points on joining',
+              '500 reward points on joining',
               'Fuel surcharge waiver',
-              'Complimentary airport lounge access (4/year)'
+              'Complimentary airport lounge access (2/year)'
             ]
           },
           {
-            name: 'HDFC Regalia Credit Card',
+            name: 'Kotak811 Royale Signature Credit Card',
             limit: '₹8L limit',
-            fee: '₹2,500/year (waived on ₹3L spends)',
+            fee: '₹1,500/year (waived on ₹2L spends)',
             benefits: [
               '4 reward points per ₹150 spent',
               'Unlimited domestic lounge access',
-              'International lounge access (6/year)',
-              'Complimentary movie tickets (2/month)',
-              '₹5,000 welcome voucher'
+              'International lounge access (4/year)',
+              'Complimentary movie tickets (1/month)',
+              '₹2,500 welcome voucher'
             ]
           },
           {
-            name: 'HDFC Infinia Credit Card',
+            name: 'Kotak811 White Reserve Credit Card',
             limit: '₹10L limit',
-            fee: '₹10,000/year (Super premium)',
+            fee: '₹5,000/year (Super premium)',
             benefits: [
               '10X rewards on travel & dining',
               'Unlimited lounge access worldwide',
               'Concierge service 24/7',
-              'Golf privileges at 250+ courses',
-              '₹10,000 Taj voucher on joining'
+              'Golf privileges at 100+ courses',
+              '₹5,000 Taj voucher on joining'
             ]
           }
         ],
@@ -1953,36 +1953,39 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
         highlight: 'Special offers for you',
         cardOptions: [
           {
-            name: 'HDFC Millennia Credit Card',
+            name: 'Kotak811 811 Super Credit Card',
             limit: '₹5L limit',
-            fee: '₹1,000/year (1st year free)',
+            fee: '₹500/year (1st year free)',
             benefits: [
               '5% cashback on Amazon, Flipkart',
-              '2.5% cashback on other spends',
+              '2.5% cashback on all other spends',
+              '500 reward points on joining',
               'Fuel surcharge waiver',
-              'Complimentary lounge access (4/year)'
+              'Complimentary airport lounge access (2/year)'
             ]
           },
           {
-            name: 'HDFC Regalia Credit Card',
+            name: 'Kotak811 Royale Signature Credit Card',
             limit: '₹8L limit',
-            fee: '₹2,500/year (waived on ₹3L spends)',
+            fee: '₹1,500/year (waived on ₹2L spends)',
             benefits: [
               '4 reward points per ₹150 spent',
               'Unlimited domestic lounge access',
-              'International lounge access (6/year)',
-              '₹5,000 welcome voucher'
+              'International lounge access (4/year)',
+              'Complimentary movie tickets (1/month)',
+              '₹2,500 welcome voucher'
             ]
           },
           {
-            name: 'HDFC Infinia Credit Card',
+            name: 'Kotak811 White Reserve Credit Card',
             limit: '₹10L limit',
-            fee: '₹10,000/year (Super premium)',
+            fee: '₹5,000/year (Super premium)',
             benefits: [
               '10X rewards on travel & dining',
               'Unlimited lounge access worldwide',
               'Concierge service 24/7',
-              'Premium joining benefits'
+              'Golf privileges at 100+ courses',
+              '₹5,000 Taj voucher on joining'
             ]
           }
         ],
@@ -2016,12 +2019,12 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
         title: 'Set up Autopay for monthly bill',
         subtitle: 'Avoid late fees by auto-debiting your credit card bill every month',
         items: [
-          { label: 'Recommended', value: 'HDFC Salary Account Autopay' },
+          { label: 'Recommended', value: 'Kotak811 Salary Account Autopay' },
           { label: 'Alternative', value: 'UPI Autopay (e-mandate)' }
         ]
       },
       actions: [
-        { label: 'Use HDFC Salary Account', action: 'setup-autopay-salary-account', variant: 'secondary' },
+        { label: 'Use Kotak811 Salary Account', action: 'setup-autopay-salary-account', variant: 'secondary' },
         { label: 'Use UPI Autopay', action: 'setup-autopay-upi', variant: 'ghost' }
       ],
       timestamp: Date.now()
@@ -2031,7 +2034,7 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
   const handleSetupAutopay = async (method: 'salary-account' | 'upi') => {
     setMessages(prev => [...prev, {
       type: 'user',
-      text: method === 'salary-account' ? 'Use HDFC Salary Account for autopay' : 'Use UPI Autopay',
+      text: method === 'salary-account' ? 'Use Kotak811 Salary Account for autopay' : 'Use UPI Autopay',
       timestamp: Date.now()
     }]);
 
@@ -2063,7 +2066,7 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
       data: {
         title: 'Submit Credit Card Application',
         fields: [
-          { label: 'Autopay Method', value: method === 'salary-account' ? 'HDFC Salary Account' : 'UPI Autopay', verified: true },
+          { label: 'Autopay Method', value: method === 'salary-account' ? 'Kotak811 Salary Account' : 'UPI Autopay', verified: true },
           { label: 'Statement Preference', value: 'Email', verified: true },
           { label: 'Delivery Address', value: userData.address, verified: true },
         ],
@@ -2237,8 +2240,8 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
                   <div className="flex items-center justify-center h-full">
                     <div className="text-center max-w-2xl px-6">
                       <div className="flex flex-col items-center mb-4">
-                        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-2">
-                          <Bot className="w-6 h-6 text-primary" />
+                        <div className="w-12 h-12 rounded-full bg-[#ff0049]/10 flex items-center justify-center mb-2">
+                          <Bot className="w-6 h-6 text-[#ff0049]" />
                         </div>
                         <h3 className="text-2xl font-bold text-gray-900 dark:text-white leading-tight">
                           FinAgent
@@ -2255,9 +2258,9 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
                             whileHover={{ y: -1 }}
                             whileTap={{ scale: 0.98 }}
                             transition={{ type: 'spring', stiffness: 420, damping: 28 }}
-                            className="group flex w-full items-center gap-2 rounded-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-3 py-2 text-sm disabled:opacity-50 hover:border-blue-300 dark:hover:border-blue-500 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                            className="group flex w-full items-center gap-2 rounded-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-3 py-2 text-sm disabled:opacity-50 hover:border-[#ff0049]/60 dark:hover:border-[#ff0049]/60 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#ff0049]"
                           >
-                            <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-primary/10 text-primary flex-shrink-0">
+                            <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-[#ff0049]/10 text-[#ff0049] flex-shrink-0">
                               {template.id === 'bank-account' && <Building2 className="w-3.5 h-3.5" />}
                               {template.id === 'personal-loan' && <Banknote className="w-3.5 h-3.5" />}
                               {template.id === 'credit-card' && <CreditCard className="w-3.5 h-3.5" />}
@@ -2270,11 +2273,11 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
                               </span>
                             </div>
                             {template.id === 'bank-account' && (
-                              <span className="ml-1.5 text-[10px] font-semibold text-green-700 bg-green-100 dark:bg-green-900/30 dark:text-green-300 rounded-full px-1.5 py-0.5 whitespace-nowrap">
+                              <span className="ml-1.5 text-[10px] font-semibold text-[#ff0049] bg-[#ff0049]/10 dark:bg-[#ff0049]/20 rounded-full px-1.5 py-0.5 whitespace-nowrap">
                                 in 5 minutes
                               </span>
                             )}
-                            <svg className="w-3 h-3 text-blue-600 dark:text-blue-400 opacity-0 group-hover:opacity-100 transition-all translate-x-0 group-hover:translate-x-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-3 h-3 text-[#ff0049] opacity-0 group-hover:opacity-100 transition-all translate-x-0 group-hover:translate-x-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                             </svg>
                           </motion.button>
@@ -2288,7 +2291,7 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
                       <div key={idx} className={`animate-fadeIn ${currentStepStartedAt && msg.timestamp && msg.timestamp < currentStepStartedAt ? 'opacity-60' : ''}`}>
                         {msg.type === 'user' && (
                           <div className="flex justify-end">
-                            <div className="max-w-[70%] rounded-2xl px-4 py-2.5 text-sm shadow-md bg-gradient-to-tr from-[hsl(var(--primary))] to-blue-600 text-white">
+                            <div className="max-w-[70%] rounded-2xl px-4 py-2.5 text-sm shadow-md bg-[#222222] text-white">
                               <p className="leading-relaxed">{msg.text}</p>
                             </div>
                           </div>
@@ -2296,13 +2299,13 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
 
                         {msg.type === 'thinking' && msg.steps && (
                           <div className="flex justify-start">
-                            <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-full px-4 py-2 shadow-sm ring-1 ring-blue-100/60 dark:ring-blue-800/40">
+                            <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-[#ff0049]/5 to-[#ff0049]/10 dark:from-[#ff0049]/20 dark:to-[#ff0049]/40 rounded-full px-4 py-2 shadow-sm ring-1 ring-[#ff0049]/40 dark:ring-[#ff0049]/40">
                               <div className="flex space-x-1">
-                                <div className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce"></div>
-                                <div className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                                <div className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                                <div className="w-1.5 h-1.5 bg-[#ff0049] rounded-full animate-bounce"></div>
+                                <div className="w-1.5 h-1.5 bg-[#ff0049] rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                                <div className="w-1.5 h-1.5 bg-[#ff0049] rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                               </div>
-                              <span className="text-xs font-medium text-primary">{formatText(msg.steps[msg.steps.length - 1])}</span>
+                              <span className="text-xs font-medium text-[#ff0049]">{formatText(msg.steps[msg.steps.length - 1])}</span>
                             </div>
                           </div>
                         )}
@@ -2311,7 +2314,7 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
                           <div className="flex justify-start">
                             <div className="max-w-[75%] bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-750 rounded-2xl px-4 py-2.5 shadow-md ring-1 ring-blue-100/60 dark:ring-gray-700/60">
                               <div className="flex items-start space-x-2">
-                                <div className="w-6 h-6 bg-gradient-to-br from-[hsl(var(--primary))] to-blue-700 rounded-md flex items-center justify-center flex-shrink-0">
+                                <div className="w-6 h-6 bg-[#ff0049] rounded-md flex items-center justify-center flex-shrink-0">
                                   <Bot className="w-3.5 h-3.5 text-white" />
                                 </div>
                                 <p className="text-sm text-gray-800 dark:text-gray-200 leading-relaxed whitespace-pre-line pt-0.5">{formatText(msg.text)}</p>
@@ -2344,7 +2347,7 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
                                           </div>
                                         </div>
                                         {field.verified && (
-                                          <Badge className="bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300">✓</Badge>
+                                          <Badge className="bg-[#ff0049]/10 text-[#ff0049] dark:bg-[#ff0049]/20 dark:text-[#ff0049]">✓</Badge>
                                         )}
                                         {field.editable && (
                                           <button className="text-xs text-blue-600 dark:text-blue-400 hover:underline">Edit</button>
@@ -2372,8 +2375,8 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
                                           else if (action.action === 'consent-pl-bureau-pull') handlePLConsentBureauPull();
                                           else if (action.action === 'confirm-pl-disbursal-account') handleConfirmPLDisbursalAccount();
                                         }}
-                                        variant={action.variant === 'ghost' ? 'outline' : 'secondary'}
-                                        className="flex-1 text-xs h-8"
+                                        variant={action.variant === 'ghost' ? 'outline' : 'default'}
+                                        className={`flex-1 text-xs h-8 ${action.variant !== 'ghost' ? 'bg-[#222222] hover:bg-black text-white' : ''}`}
                                       >
                                         {formatText(action.label)}
                                       </Button>
@@ -2502,7 +2505,7 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
                           <div className="flex justify-start">
                             <div className="max-w-[85%] w-full">
                               <Card className="border border-blue-200 dark:border-gray-700 shadow-sm overflow-hidden rounded-lg">
-                                <div className="bg-primary p-4">
+                                <div className="bg-[#222222] p-4">
                                   <h4 className="font-semibold text-sm text-white flex items-center">
                                     <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -2573,7 +2576,7 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
                           <div className="flex justify-start">
                             <div className="max-w-[85%] w-full">
                               <Card className="border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden rounded-lg">
-                                <div className="bg-primary p-4">
+                                <div className="bg-[#222222] p-4">
                                   <div className="flex items-center space-x-2">
                                     {msg.data.cardOptions ? (
                                       <CreditCard className="w-4 h-4 text-white" />
@@ -2804,7 +2807,7 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
                           <div className="flex justify-start">
                             <div className="max-w-[80%] w-full">
                               <Card className="border border-green-200 dark:border-green-800 shadow-sm overflow-hidden animate-scaleIn rounded-lg">
-                                <div className="bg-green-600 p-4">
+                                <div className="bg-[#ff0049] p-4">
                                   <div className="flex items-center space-x-3">
                                     <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
                                       <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -2826,7 +2829,7 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
                                     <div className="grid grid-cols-1 gap-2 mb-3">
                                       {msg.data.details.slice(0, 4).map((detail: string, i: number) => (
                                         <div key={i} className="flex items-start space-x-2 text-xs">
-                                          <span className="text-green-600 mt-0.5">•</span>
+                                          <span className="text-[#ff0049] mt-0.5">•</span>
                                           <span className="text-gray-700 dark:text-gray-300">{formatText(detail)}</span>
                                         </div>
                                       ))}
@@ -2878,7 +2881,7 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
                     id="send-btn"
                     onClick={handleSend} 
                     disabled={!inputValue.trim() || isThinking}
-                    className="h-10 px-4"
+                    className="h-10 px-4 bg-[#222222] hover:bg-black text-white"
                   >
                     {isThinking ? (
                       <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -2891,35 +2894,35 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
             </Card>
           </div>
 
-          {/* Right Sidebar - Task Progress (Conditional) */}
-          {(messages.length > 0 || activeJourney || journeySteps.length > 0) && (
-            <div className="w-80 h-full bg-gradient-to-b from-white to-blue-50 dark:from-gray-900 dark:to-gray-800 overflow-y-auto rounded-xl overflow-hidden shadow-sm">
-              <div className="p-4 sticky top-0 z-10 bg-gradient-to-r from-[hsl(var(--primary))] to-blue-600 text-white shadow">
-                <h3 className="font-semibold text-sm text-white flex items-center">
-                  <svg className="w-5 h-5 mr-2 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-                  </svg>
-                  Task Progress
-                </h3>
-              </div>
+              {/* Right Sidebar - Task Progress (Conditional) */}
+              {(messages.length > 0 || activeJourney || journeySteps.length > 0) && (
+                <div className="w-80 h-full bg-gradient-to-b from-white to-blue-50 dark:from-gray-900 dark:to-gray-800 overflow-y-auto rounded-xl overflow-hidden shadow-sm">
+                  <div className="p-4 sticky top-0 z-10 bg-[#222222] text-white shadow">
+                    <h3 className="font-semibold text-sm text-white flex items-center">
+                      <svg className="w-5 h-5 mr-2 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                      </svg>
+                      Task Progress
+                    </h3>
+                  </div>
 
-              <div className="p-4 space-y-4">
-                {/* Active Journey Indicator */}
-                {activeJourney && (
-                  <Card className="p-4 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 ring-1 ring-blue-100/60 dark:ring-blue-800/60 rounded-lg animate-fadeIn">
-                    <div className="flex items-start space-x-3">
-                      <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
-                        <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-xs font-semibold text-blue-900 dark:text-blue-100 mb-1">In Progress</p>
-                        <p className="text-sm text-gray-800 dark:text-gray-200 line-clamp-2">
-                          {journeyTemplates.find(t => t.id === activeJourney)?.title || 'Processing...'}
-                        </p>
-                      </div>
-                    </div>
-                  </Card>
-                )}
+                  <div className="p-4 space-y-4">
+                    {/* Active Journey Indicator */}
+                    {activeJourney && (
+                      <Card className="p-4 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 ring-1 ring-blue-100/60 dark:ring-blue-800/60 rounded-lg animate-fadeIn">
+                        <div className="flex items-start space-x-3">
+                          <div className="w-8 h-8 bg-[#ff0049] rounded-lg flex items-center justify-center flex-shrink-0">
+                            <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-xs font-semibold text-blue-900 dark:text-blue-100 mb-1">In Progress</p>
+                            <p className="text-sm text-gray-800 dark:text-gray-200 line-clamp-2">
+                              {journeyTemplates.find(t => t.id === activeJourney)?.title || 'Processing...'}
+                            </p>
+                          </div>
+                        </div>
+                      </Card>
+                    )}
 
                 {/* Detailed Journey Steps */}
                 {journeySteps.length > 0 && (
@@ -2930,7 +2933,7 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
                         <div key={idx} className="flex items-start space-x-3">
                           <div className="flex-shrink-0 mt-0.5">
                             {step.status === 'completed' ? (
-                              <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center">
+                              <div className="w-5 h-5 bg-[#ff0049] rounded-full flex items-center justify-center">
                                 <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                                 </svg>
@@ -2945,7 +2948,7 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
                           </div>
                           <div className="flex-1 min-w-0">
                             <p className={`text-xs font-medium ${
-                              step.status === 'completed' ? 'text-green-700 dark:text-green-400' :
+                              step.status === 'completed' ? 'text-[#ff0049] dark:text-[#ff0049]' :
                               step.status === 'in-progress' ? 'text-blue-700 dark:text-blue-400' :
                               'text-gray-500 dark:text-gray-500'
                             }`}>
@@ -2967,7 +2970,7 @@ export const Agent: React.FC<AgentProps> = ({ onLogout, onNavigate }) => {
                 {messages.filter(m => m.type === 'success').map((msg, idx) => (
                   <Card key={idx} className="p-4 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 ring-1 ring-green-200/60 dark:ring-green-800/60 rounded-lg animate-fadeIn">
                     <div className="flex items-start space-x-3">
-                      <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <div className="w-8 h-8 bg-[#ff0049] rounded-lg flex items-center justify-center flex-shrink-0">
                         <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                         </svg>

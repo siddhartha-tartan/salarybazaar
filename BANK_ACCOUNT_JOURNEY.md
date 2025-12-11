@@ -83,9 +83,9 @@
 - **UI**: Success Card with complete details
 - **Features**:
   - Account Number: 50100XXXXXXX
-  - IFSC Code: HDFC0000001
+  - IFSC Code: KKBK0000001
   - Virtual Card Number (partially masked)
-  - UPI ID: rahul@hdfcbank
+  - UPI ID: rahul@kotak811
   - Welcome Bonus: ₹500
 - **Realistic Touch**: Virtual card immediately active
 

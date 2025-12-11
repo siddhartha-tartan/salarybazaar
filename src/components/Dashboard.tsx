@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { AIHeroSection } from "./dashboard/AIHeroSection";
 import { PreApprovedOffers } from "./dashboard/PreApprovedOffers";
-import { GoalJourneys } from "./dashboard/GoalJourneys";
 import { ProductMarketplace } from "./dashboard/ProductMarketplace";
 import { AppLayout } from "./AppLayout";
 import { PageTransition } from "./PageTransition";
@@ -31,29 +30,26 @@ export const Dashboard: React.FC<DashboardProps> = ({ onLogout, onNavigate }) =>
     >
       <PageTransition pageKey="dashboard">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="space-y-6">
-          {/* AI Hero Section */}
-          <AIHeroSection 
-            userName={userData.name}
-            onOpenChat={() => setChatExpanded(true)}
-            onNavigate={onNavigate}
-          />
+          <div className="space-y-8">
+            {/* AI Hero Section */}
+            <AIHeroSection 
+              userName={userData.name}
+              onOpenChat={() => setChatExpanded(true)}
+              onNavigate={onNavigate}
+            />
 
-          {/* Pre-approved Offers */}
-          <section>
-            <PreApprovedOffers />
-          </section>
+            {/* Overview: stack Pre-approved Offers */}
+            <div className="space-y-6">
+              <section>
+                <PreApprovedOffers />
+              </section>
+            </div>
 
-          {/* Goal-based Journeys */}
-          <section>
-            <GoalJourneys />
-          </section>
-
-          {/* Product Marketplace */}
-          <section>
-            <ProductMarketplace />
-          </section>
-        </div>
+            {/* Product Marketplace */}
+            <section>
+              <ProductMarketplace />
+            </section>
+          </div>
         </div>
       </PageTransition>
     </AppLayout>

@@ -29,15 +29,15 @@ export function Links() {
       icon: "👥",
     },
     {
-      title: "CRM Portal",
-      description: "Customer Relationship Management interface for relationship managers",
+      title: "Kotak811 for Corporates",
+      description: "Corporate relationship console for RMs and sales teams",
       hash: "#crm",
       icon: "💼",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-[hsl(var(--background))] via-white to-[hsl(var(--accent))]/20">
       <div className="container mx-auto px-4 py-12 max-w-6xl">
         {/* Header */}
         <div className="text-center mb-12">

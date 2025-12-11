@@ -2,7 +2,7 @@
 
 ## 🎯 Project Overview
 
-An **AI-centric, corporate-branded unified digital hub** where employees can access banking and financial services seamlessly within their work ecosystem. Built for HDFC Bank + Tartan partnership.
+An **AI-centric, corporate-branded unified digital hub** where employees can access banking and financial services seamlessly within their work ecosystem. Built for Kotak811 + Tartan partnership.
 
 ## 🏗️ Architecture & Design Philosophy
 
@@ -16,14 +16,14 @@ An **AI-centric, corporate-branded unified digital hub** where employees can acc
 - **Frontend**: React + TypeScript
 - **Styling**: Tailwind CSS + shadcn/ui components
 - **Font**: Plus Jakarta Sans
-- **Color Scheme**: HDFC Bank Blue gradient theme
+- **Color Scheme**: Kotak811 theme
 - **State Management**: React hooks
 - **Build Tool**: Vite
 
 ## 📐 Current Layout Structure
 
 ### 1. Login Page (`/src/components/Login.tsx`)
-- **Left (60%)**: Geographic illustration with HDFC branding
+- **Left (60%)**: Geographic illustration with Kotak811 branding
 - **Right (40%)**: Mobile OTP login
   - Step 1: Phone number input (auto-focused)
   - Step 2: OTP verification (auto-focused)
@@ -46,7 +46,7 @@ An **AI-centric, corporate-branded unified digital hub** where employees can acc
   - Agentic thinking visualization
 
 #### Header
-- HDFC Bank branding
+- Kotak811 branding
 - Navigation: Dashboard | My Orders
 - User dropdown menu (Profile, Settings, Logout)
 
@@ -180,11 +180,11 @@ Employee's financial products and applications overview.
 
 ## 🎨 Design System
 
-### Colors (HDFC Blue Theme)
+### Colors (Kotak811 Theme)
 ```css
---primary: 210 100% 27.5%     /* HDFC Deep Blue */
---secondary: 205 90% 95%       /* Light Blue */
---accent: 205 95% 92%          /* Accent Blue */
+--primary: 231 100% 61%;     /* Primary brand blue (#3857ff) */
+--secondary: 231 100% 96%;   /* Soft blue surfaces */
+--accent: 343 100% 96%;      /* Subtle accent tint from #ff0049 */
 ```
 
 ### Spacing
@@ -351,7 +351,7 @@ src/
 
 ## 📞 Support & Contact
 
-- **HDFC Bank**: Primary banking partner
+- **Kotak811**: Primary banking partner
 - **Tartan**: Technology platform provider
 - **Company HR**: Employee benefits coordination
 

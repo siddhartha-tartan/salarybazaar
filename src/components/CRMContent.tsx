@@ -95,7 +95,7 @@ export const CRMContent: React.FC<CRMContentProps> = ({ activeTab, onTabChange }
   ];
 
   // Repeat the employees to show a long list (70+ employees)
-  const banks = ['HDFC Bank', 'ICICI Bank', 'State Bank of India', 'Axis Bank', 'Kotak Mahindra Bank'];
+  const banks = ['Kotak811', 'ICICI Bank', 'State Bank of India', 'Axis Bank', 'Kotak Mahindra Bank'];
   const baseWithSalaryAccounts = baseEmployees.map((emp, idx) => ({
     ...emp,
     salaryAccountBank: banks[idx % banks.length],
@@ -136,25 +136,61 @@ export const CRMContent: React.FC<CRMContentProps> = ({ activeTab, onTabChange }
     criteria: string[];
     benefits: string[];
   }>>([
-    { id: 'R1', name: 'Platinum Credit Card', type: 'Credit Card', tier: 'Platinum', icon: '💳', gradient: 'from-purple-500 to-blue-600', eligible: 234, approvalRate: 89, 
-      criteria: ['Salary ≥ ₹8L', 'Credit Score ≥ 750', 'Tenure ≥ 2 years'], 
-      benefits: ['5% cashback', 'Lounge access', 'Zero forex'] },
-    { id: 'R2', name: 'Gold Credit Card', type: 'Credit Card', tier: 'Gold', icon: '🌟', gradient: 'from-yellow-500 to-orange-500', eligible: 567, approvalRate: 92,
-      criteria: ['Salary ≥ ₹5L', 'Credit Score ≥ 700', 'Tenure ≥ 1 year'],
-      benefits: ['2% cashback', 'Dining rewards', 'Travel insurance'] },
-    { id: 'R3', name: 'Personal Loan', type: 'Loan', tier: 'Standard', icon: '💰', gradient: 'from-green-500 to-emerald-600', eligible: 892, approvalRate: 87,
-      criteria: ['Salary ≥ ₹3L', 'Credit Score ≥ 650', 'Tenure ≥ 6 months'],
-      benefits: ['Up to 20x salary', '10.5%-14% interest', '12-60 months tenure'] },
-    { id: 'R4', name: 'Home Loan', type: 'Loan', tier: 'Premium', icon: '🏠', gradient: 'from-blue-500 to-cyan-500', eligible: 156, approvalRate: 78,
-      criteria: ['Salary ≥ ₹10L', 'Credit Score ≥ 750', 'Tenure ≥ 2 years', 'Age ≤ 55'],
-      benefits: ['Up to ₹2Cr', '8.5% interest', 'Zero processing fee'] },
+    { 
+      id: 'R1',
+      name: 'Kotak 811 Salary Account',
+      type: 'Account',
+      tier: 'Salary Program',
+      icon: '🏦',
+      gradient: 'from-primary to-primary/80',
+      eligible: 1247,
+      approvalRate: 96, 
+      criteria: ['Corporate employee', 'Salary credit via Kotak 811', 'KYC completed'], 
+      benefits: ['Zero-balance salary account', 'Virtual debit card & UPI', 'Exclusive corporate offers'] 
+    },
+    { 
+      id: 'R2',
+      name: 'Kotak 811 Personal Loan',
+      type: 'Loan',
+      tier: 'Preferred',
+      icon: '💰',
+      gradient: 'from-green-500 to-emerald-600',
+      eligible: 892,
+      approvalRate: 87,
+      criteria: ['Active Kotak 811 salary account', 'Salary ≥ ₹3L', 'Credit Score ≥ 650'],
+      benefits: ['Preferential interest rates', 'Quick, paperless journey', 'Tenure 12–60 months'] 
+    },
+    { 
+      id: 'R3',
+      name: '811 Super Credit Card',
+      type: 'Credit Card',
+      tier: 'Corporate Program',
+      icon: '💳',
+      gradient: 'from-yellow-500 to-orange-500',
+      eligible: 567,
+      approvalRate: 92,
+      criteria: ['Salary ≥ ₹5L', 'Kotak 811 salary credit', 'Minimum 6 months vintage'],
+      benefits: ['Cashback & travel rewards', 'Simplified KYC for employees', 'Auto-debit from salary account'] 
+    },
+    { 
+      id: 'R4',
+      name: 'Kotak 811 Health',
+      type: 'Insurance',
+      tier: 'Benefits',
+      icon: '🛡️',
+      gradient: 'from-primary to-primary/80',
+      eligible: 420,
+      approvalRate: 90,
+      criteria: ['Eligible for allowances', 'Corporate approval', 'Active employment'],
+      benefits: ['Health and accident cover', 'Linked to Kotak accounts', 'Real-time tracking for employees'] 
+    },
   ]);
   const [isAddingProduct, setIsAddingProduct] = useState(false);
   const [newProductForm, setNewProductForm] = useState({ name: '', type: 'Credit Card', tier: 'Standard', criteria: '', benefits: '' });
   const [editingProductId, setEditingProductId] = useState<string | null>(null);
   const [editForm, setEditForm] = useState<{ criteria: string[]; benefits: string[] }>({ criteria: [], benefits: [] });
   const [statusByEmpId, setStatusByEmpId] = useState<Record<string, string>>({});
-  const generateSignupLink = (empId: string) => `https://hdfc.com/salary-account?emp=${empId}`;
+  const generateSignupLink = (empId: string) => `https://kotak811.com/salary-account?emp=${empId}`;
   const markStatus = (empId: string, status: string) => {
     setStatusByEmpId(prev => ({ ...prev, [empId]: status }));
   };
@@ -305,11 +341,11 @@ export const CRMContent: React.FC<CRMContentProps> = ({ activeTab, onTabChange }
       {activeTab === 'corporates' && (
         <div className="space-y-6">
           {/* Header Section */}
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-800/50 border border-gray-200 dark:border-gray-700 p-6">
+          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 dark:from-gray-800 dark:to-gray-800/50 border border-gray-200 dark:border-gray-700 p-6">
             <div className="relative z-10">
               <div className="mb-6 flex items-center justify-between gap-4">
                 <div>
-                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Corporate Clients</h2>
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Kotak811 for Corporates</h2>
                   <p className="text-gray-600 dark:text-gray-400">{corporates.length} active corporate partnerships</p>
                 </div>
                 <Button
@@ -330,8 +366,8 @@ export const CRMContent: React.FC<CRMContentProps> = ({ activeTab, onTabChange }
                 <div className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm border border-gray-200 dark:border-gray-700">
                   <div className="flex items-center justify-between mb-2">
                     <p className="text-xs font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wide">Total Corporates</p>
-                    <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
-                      <svg className="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="w-8 h-8 bg-primary/10 dark:bg-primary/20 rounded-lg flex items-center justify-center">
+                      <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                       </svg>
                     </div>
@@ -545,7 +581,7 @@ export const CRMContent: React.FC<CRMContentProps> = ({ activeTab, onTabChange }
                       <tr key={corp.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center">
-                            <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-sm mr-3">
+                            <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center text-white font-bold text-sm mr-3">
                               {corp.name.substring(0, 2).toUpperCase()}
                             </div>
                             <div>
@@ -555,7 +591,7 @@ export const CRMContent: React.FC<CRMContentProps> = ({ activeTab, onTabChange }
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <span className="px-2 py-1 text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 rounded-full">
+                          <span className="px-2 py-1 text-xs font-medium bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary rounded-full">
                             {corp.industry}
                           </span>
                         </td>
@@ -742,10 +778,10 @@ export const CRMContent: React.FC<CRMContentProps> = ({ activeTab, onTabChange }
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center gap-2">
-                            <span className={`text-sm ${emp.salaryAccountBank === 'HDFC Bank' ? 'text-green-700 dark:text-green-400 font-semibold' : 'text-gray-900 dark:text-white'}`}>
+                            <span className={`text-sm ${emp.salaryAccountBank === 'Kotak811' ? 'text-green-700 dark:text-green-400 font-semibold' : 'text-gray-900 dark:text-white'}`}>
                               {emp.salaryAccountBank}
                             </span>
-                            {emp.salaryAccountBank === 'HDFC Bank' ? null : statusByEmpId[emp.id] ? (
+                            {emp.salaryAccountBank === 'Kotak811' ? null : statusByEmpId[emp.id] ? (
                               <Badge className="bg-gray-100 text-gray-600 border border-gray-200 dark:bg-gray-800/40 dark:text-gray-300 dark:border-gray-700 opacity-80 text-[10px] font-medium">
                                 {statusByEmpId[emp.id]}
                               </Badge>
@@ -865,10 +901,10 @@ export const CRMContent: React.FC<CRMContentProps> = ({ activeTab, onTabChange }
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <div className="flex items-center gap-2">
-                              <span className={`text-sm ${emp.salaryAccountBank === 'HDFC Bank' ? 'text-green-700 dark:text-green-400 font-semibold' : 'text-gray-900 dark:text-white'}`}>
+                            <span className={`text-sm ${emp.salaryAccountBank === 'Kotak811' ? 'text-green-700 dark:text-green-400 font-semibold' : 'text-gray-900 dark:text-white'}`}>
                                 {emp.salaryAccountBank}
                               </span>
-                            {emp.salaryAccountBank === 'HDFC Bank' ? null : statusByEmpId[emp.id] ? (
+                            {emp.salaryAccountBank === 'Kotak811' ? null : statusByEmpId[emp.id] ? (
                                 <Badge className="bg-gray-100 text-gray-600 border border-gray-200 dark:bg-gray-800/40 dark:text-gray-300 dark:border-gray-700 opacity-80 text-[10px] font-medium">
                                   {statusByEmpId[emp.id]}
                                 </Badge>
@@ -950,7 +986,7 @@ export const CRMContent: React.FC<CRMContentProps> = ({ activeTab, onTabChange }
                           <div className="space-y-2">
                             {rule.criteria.map((c, idx) => (
                               <div key={idx} className="text-sm text-gray-700 dark:text-gray-300 flex items-start">
-                                <span className="text-blue-600 mr-2">•</span>
+                                <span className="text-primary mr-2">•</span>
                                 <span>{c}</span>
                               </div>
                             ))}
@@ -1101,7 +1137,7 @@ export const CRMContent: React.FC<CRMContentProps> = ({ activeTab, onTabChange }
                     <div className="space-y-2">
                       {rule.criteria.map((c, idx) => (
                         <div key={idx} className="text-sm text-gray-700 dark:text-gray-300 flex items-start">
-                          <span className="text-blue-600 mr-2">•</span>
+                          <span className="text-primary mr-2">•</span>
                           <span>{c}</span>
                         </div>
                       ))}
@@ -1262,9 +1298,9 @@ export const CRMContent: React.FC<CRMContentProps> = ({ activeTab, onTabChange }
             </div>
           </div>
 
-          <Card className="p-6">
-            <div className="flex items-start space-x-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-blue-700 rounded-xl flex items-center justify-center flex-shrink-0">
+            <Card className="p-6">
+              <div className="flex items-start space-x-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center flex-shrink-0">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                 </svg>
@@ -1308,7 +1344,7 @@ export const CRMContent: React.FC<CRMContentProps> = ({ activeTab, onTabChange }
           {isAnalyzing && (
             <Card className="p-12">
               <div className="text-center">
-                <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-4"></div>
+                <div className="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin mx-auto mb-4"></div>
                 <p className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Analyzing your data...</p>
                 <p className="text-sm text-gray-600 dark:text-gray-400">Processing query across portfolio</p>
               </div>
@@ -1332,7 +1368,7 @@ export const CRMContent: React.FC<CRMContentProps> = ({ activeTab, onTabChange }
 
               <div className="grid grid-cols-3 gap-4 mb-6">
                 {analyticsResult.metrics.map((metric: any, idx: number) => (
-                  <div key={idx} className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 rounded-xl p-4 text-center">
+                  <div key={idx} className="bg-gradient-to-br from-primary/5 to-primary/10 dark:from-gray-900 dark:to-gray-800 rounded-xl p-4 text-center">
                     <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">{metric.label}</p>
                     <p className="text-3xl font-bold text-gray-900 dark:text-white">{metric.value}</p>
                     {metric.percentage !== undefined && (
@@ -1344,7 +1380,7 @@ export const CRMContent: React.FC<CRMContentProps> = ({ activeTab, onTabChange }
                 ))}
               </div>
 
-              <div className="bg-blue-50 dark:bg-gray-900 rounded-xl p-4 mb-4">
+              <div className="bg-primary/5 dark:bg-gray-900 rounded-xl p-4 mb-4">
                 <p className="text-sm font-semibold text-gray-900 dark:text-white mb-2">🏆 Top Performer:</p>
                 <p className="text-gray-700 dark:text-gray-300">{analyticsResult.topCorporate}</p>
               </div>
