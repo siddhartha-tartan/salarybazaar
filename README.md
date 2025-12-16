@@ -1,134 +1,60 @@
-# Kotak811 for enterprises
+# React Vite Boilerplate
 
-A corporate-branded, unified digital hub where employees can access banking and financial services seamlessly within their work ecosystem. Built for **Kotak811 + Tartan** partnership.
-
-## 🎯 Overview
-
-This platform provides:
-- **AI-Centric Experience**: FinAgent (AI Financial Agent) for personalized recommendations
-- **Hyper-Personalization**: Products based on salary, tenure, and company policies
-- **Pre-approved Offers**: Credit cards, loans, insurance
-- **Goal-Based Planning**: Help employees achieve life goals
-- **HR Management**: Benefits administration and approval workflows
+This is a clean boilerplate built with React, TypeScript, Vite, Tailwind CSS, and shadcn/ui. It is designed to be a starting point for building modern web applications with a pre-configured dashboard layout.
 
 ## 🚀 Getting Started
 
-```bash
-npm install
-npm run dev
-```
+1.  **Install dependencies:**
 
-The app will start on `http://localhost:5173`
+    ```bash
+    npm install
+    ```
 
-## 🔐 Login Credentials
+2.  **Start development server:**
 
-**Mock Authentication** - Use any credentials:
-- **Phone**: Any 10-digit number
-- **OTP**: Any 6-digit number
+    ```bash
+    npm run dev
+    ```
 
-## 📱 Pages & Navigation
+    The app will start on `http://localhost:5173`.
 
-### Employee Interface
-1. **Login Page** (`/`)
-   - Mobile OTP authentication
-   - Geographic branding on left
+3.  **Build for production:**
 
-2. **Dashboard** (after login)
-   - 80/20 split layout
-   - FinAgent AI sidebar
-   - Financial health score
-   - Pre-approved offers
-   - Goal-based journeys
-   - Product marketplace
-
-3. **My Orders** (via navigation button)
-   - Active products (credit cards, insurance, etc.)
-   - Application history
-   - Track status of applications
-
-### HR Portal
-**Note**: The HR Portal is a separate interface for HR administrators (role-based access).
-
-**To access the HR Portal**:
-- Simply navigate to: `http://localhost:5173/#hr`
-- Or append `#hr` to your current URL
-- The HR portal will auto-authenticate (separate role in production)
-
-**HR Features**:
-- Overview dashboard with company metrics
-- Employee directory with HRMS sync
-- Benefits management (enable/disable products)
-- Approval queue for pending applications
-
-## 🎨 Design System
-
-- **Framework**: React + TypeScript + Vite
-- **Styling**: Tailwind CSS + shadcn/ui
-- **Font**: Plus Jakarta Sans
-- **Colors**: Kotak811 theme
-- **Components**: shadcn/ui (Button, Card, Badge, Input, etc.)
+    ```bash
+    npm run build
+    ```
 
 ## 📂 Project Structure
 
 ```
 src/
 ├── components/
-│   ├── Login.tsx                 # Login page
-│   ├── Dashboard.tsx             # Employee dashboard
-│   ├── Orders.tsx                # My Orders page
-│   ├── HR.tsx                    # HR Portal
-│   ├── ui/                       # shadcn/ui components
-│   └── dashboard/                # Dashboard components
-├── App.tsx                       # Main app router
-├── index.css                     # Global styles + Kotak811 theme
-└── main.tsx                      # Entry point
+│   ├── ui/               # Reusable UI components (shadcn/ui)
+│   ├── AppLayout.tsx     # Main application shell with Sidebar
+│   ├── Dashboard.tsx     # Example dashboard page
+│   └── Sidebar.tsx       # Navigation sidebar
+├── lib/
+│   └── utils.ts          # Utility functions (cn, etc.)
+├── App.tsx               # Main application entry & routing
+├── index.css             # Global styles & Tailwind configuration
+└── main.tsx              # React DOM entry point
 ```
 
-## 📖 Documentation
+## 🎨 Design System
 
-See `PROJECT_DIRECTIONS.md` for comprehensive documentation including:
-- Architecture and design philosophy
-- Component structure
-- User flows
-- Mock data
-- Development guidelines
+-   **Framework**: React 18 + TypeScript
+-   **Build Tool**: Vite
+-   **Styling**: Tailwind CSS
+-   **UI Library**: shadcn/ui components (Radix UI based)
+-   **Icons**: Lucide React
+-   **Font**: Plus Jakarta Sans (configurable in `index.css`)
 
-## 🔧 Tech Stack
+## 🛠 Customization
 
-- **React 18** with TypeScript
-- **Vite** for fast development
-- **Tailwind CSS** for styling
-- **shadcn/ui** for UI components
-- **React Hooks** for state management
+-   **Theme**: Edit `src/index.css` to change CSS variables for colors, radius, etc.
+-   **Layout**: Modify `src/components/AppLayout.tsx` and `src/components/Sidebar.tsx` to adjust the shell.
+-   **Components**: Add new shadcn/ui components using the CLI or by copying them to `src/components/ui`.
 
-## 🎯 Key Features
+## License
 
-### FinAgent (AI Agent)
-- Smart pre-configured actions
-- Step-by-step thinking visualization
-- Personalized responses based on employee profile
-- Natural language interface
-
-### Hyper-Personalization
-- All recommendations based on salary, tenure, financial score
-- Dynamic interest rates
-- Tailored product suggestions
-
-### HR Management
-- Employee directory with sync
-- Benefits administration
-- Approval workflows
-- Analytics dashboard
-
-## 🚀 Future Enhancements
-
-- Real API integration
-- Role-based authentication
-- Document upload & verification
-- Real HRMS sync
-- Bank account linking
-- Mobile app
-
----
-
-**Built with ❤️ for Kotak811 x Tartan**
+MIT
