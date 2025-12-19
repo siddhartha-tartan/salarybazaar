@@ -95,8 +95,8 @@ const SectionHeader = ({ title, icon: Icon, color }: any) => (
 );
 
 const MobileCarousel = ({ children }: { children: React.ReactNode }) => (
-  <div className="-mx-4 px-4 overflow-x-auto no-scrollbar scroll-touch">
-    <div className="flex w-max gap-4 snap-x snap-mandatory">
+  <div className="-mx-4 px-4 carousel-x no-scrollbar">
+    <div className="carousel-row gap-4">
       {children}
     </div>
   </div>
@@ -142,7 +142,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
     <div className="flex flex-col w-full min-h-screen">
       
       {/* Expanded Hero Section */}
-      <section className="relative pt-16 pb-20 z-40 overflow-visible">
+      <section className="relative pt-16 pb-20 z-40 overflow-hidden sm:overflow-visible">
         {/* Background Decorative Elements */}
         <div className="absolute inset-0 pointer-events-none">
            <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-blue-100/40 rounded-full mix-blend-multiply filter blur-[100px] animate-blob"></div>

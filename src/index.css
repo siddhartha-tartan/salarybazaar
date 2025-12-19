@@ -106,6 +106,20 @@
     -webkit-overflow-scrolling: touch;
   }
 
+  .carousel-x {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    touch-action: pan-x;
+    scroll-snap-type: x proximity;
+  }
+
+  .carousel-row {
+    display: flex;
+    width: max-content;
+  }
+
   .custom-scrollbar::-webkit-scrollbar {
     width: 4px;
     height: 4px;
