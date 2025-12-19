@@ -339,7 +339,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
 
       {/* Main Content Area */}
       {userType === 'individual' ? (
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-8 sm:space-y-12">
+        <section className="max-w-[100%] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-8 sm:space-y-12">
           
           {/* Priority 1: Salary & Banking (The Core) */}
           <motion.div
@@ -354,7 +354,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                {/* Hero Feature Card - Drives conversion for the main product */}
                <motion.div 
                  whileHover={{ y: -5, scale: 1.01 }}
-                 className="sm:col-span-2 bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 rounded-2xl p-6 text-white shadow-xl relative overflow-hidden group cursor-pointer border border-blue-500/30 min-h-[280px] flex flex-col justify-between w-full min-w-0" 
+                 className="col-span-1 sm:col-span-2 bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 rounded-2xl p-6 text-white shadow-xl relative overflow-hidden group cursor-pointer border border-blue-500/30 min-h-[280px] flex flex-col justify-between w-[100%] min-w-0" 
                  onClick={() => onNavigate('salary-accounts')}
                >
                   <div className="relative z-10 flex flex-col justify-between h-full min-w-0">
