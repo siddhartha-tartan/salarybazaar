@@ -9,8 +9,11 @@
     @apply border-border;
     font-family: 'Plus Jakarta Sans', sans-serif;
   }
+  html {
+    @apply overflow-x-hidden;
+  }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-x-hidden;
     font-family: 'Plus Jakarta Sans', sans-serif;
   }
   :root {

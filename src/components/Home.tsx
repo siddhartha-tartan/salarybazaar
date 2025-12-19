@@ -95,8 +95,8 @@ const SectionHeader = ({ title, icon: Icon, color }: any) => (
 );
 
 const MobileCarousel = ({ children }: { children: React.ReactNode }) => (
-  <div className="-mx-4 px-4 carousel-x no-scrollbar">
-    <div className="carousel-row gap-4">
+  <div className="overflow-x-auto overflow-y-hidden no-scrollbar scroll-touch">
+    <div className="inline-flex gap-4 pr-4">
       {children}
     </div>
   </div>
@@ -384,14 +384,14 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                {/* Mobile: swipeable cards */}
                <div className="sm:hidden">
                  <MobileCarousel>
-                   <div className="w-[82vw] max-w-[340px] snap-start shrink-0">
+                   <div className="w-[82vw] max-w-[340px] shrink-0">
                      <ProductCard 
                        icon={CreditCard} label="Credit Cards" subLabel="Lifetime Free & Cashback" 
                        colorClass="text-purple-600" bgClass="bg-purple-50"
                        onClick={() => onNavigate('salary-accounts')} 
                      />
                    </div>
-                   <div className="w-[82vw] max-w-[340px] snap-start shrink-0">
+                   <div className="w-[82vw] max-w-[340px] shrink-0">
                      <ProductCard 
                        icon={Gauge} label="Credit Score" subLabel="Check Report for Free" 
                        colorClass="text-emerald-600" bgClass="bg-emerald-50"
@@ -430,28 +430,28 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
             {/* Mobile: swipeable carousel */}
             <div className="sm:hidden">
               <MobileCarousel>
-                <div className="w-[76vw] max-w-[320px] snap-start shrink-0">
+                <div className="w-[76vw] max-w-[320px] shrink-0">
                   <ProductCard 
                     icon={PiggyBank} label="Fixed Deposits" subLabel="Higher rates for Corporates" tag="Safe"
                     colorClass="text-green-600" bgClass="bg-green-50"
                     onClick={() => onNavigate('investments')} 
                   />
                 </div>
-                <div className="w-[76vw] max-w-[320px] snap-start shrink-0">
+                <div className="w-[76vw] max-w-[320px] shrink-0">
                   <ProductCard 
                     icon={Landmark} label="NPS (Pension)" subLabel="Save Tax up to ₹50k" 
                     colorClass="text-teal-600" bgClass="bg-teal-50"
                     onClick={() => onNavigate('investments')} 
                   />
                 </div>
-                <div className="w-[76vw] max-w-[320px] snap-start shrink-0">
+                <div className="w-[76vw] max-w-[320px] shrink-0">
                   <ProductCard 
                     icon={TrendingUp} label="Mutual Funds" subLabel="Direct Plans, 0% Comm." 
                     colorClass="text-emerald-600" bgClass="bg-emerald-50"
                     onClick={() => onNavigate('investments')} 
                   />
                 </div>
-                <div className="w-[76vw] max-w-[320px] snap-start shrink-0">
+                <div className="w-[76vw] max-w-[320px] shrink-0">
                   <ProductCard 
                     icon={Scroll} label="Digital Gold" subLabel="Buy, Sell or SIP" 
                     colorClass="text-amber-500" bgClass="bg-amber-50"
@@ -497,25 +497,25 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
              {/* Mobile: swipeable carousel */}
              <div className="sm:hidden">
                <MobileCarousel>
-                 <div className="w-[76vw] max-w-[320px] snap-start shrink-0">
+                 <div className="w-[76vw] max-w-[320px] shrink-0">
                    <ProductCard 
                      icon={Banknote} label="Personal Loan" subLabel="Approval in 5 mins" 
                      onClick={() => onNavigate('salary-accounts')} 
                    />
                  </div>
-                 <div className="w-[76vw] max-w-[320px] snap-start shrink-0">
+                 <div className="w-[76vw] max-w-[320px] shrink-0">
                    <ProductCard 
                      icon={HomeIcon} label="Home Loan" subLabel="Balance Transfer Offers" 
                      onClick={() => onNavigate('salary-accounts')} 
                    />
                  </div>
-                 <div className="w-[76vw] max-w-[320px] snap-start shrink-0">
+                 <div className="w-[76vw] max-w-[320px] shrink-0">
                    <ProductCard 
                      icon={Briefcase} label="Business Loan" subLabel="Collateral Free Options" 
                      onClick={() => onNavigate('salary-accounts')} 
                    />
                  </div>
-                 <div className="w-[76vw] max-w-[320px] snap-start shrink-0">
+                 <div className="w-[76vw] max-w-[320px] shrink-0">
                    <ProductCard 
                      icon={Car} label="Car Loan" subLabel="Up to 100% On-Road Funding" 
                      onClick={() => onNavigate('salary-accounts')} 
