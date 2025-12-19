@@ -342,14 +342,14 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
              className="relative z-10"
           >
             <SectionHeader title="Maximize Your Salary" icon={Building2} color="bg-blue-500 text-blue-500" />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-full">
                {/* Hero Feature Card - Drives conversion for the main product */}
                <motion.div 
                  whileHover={{ y: -5, scale: 1.01 }}
-                 className="sm:col-span-2 bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 rounded-2xl p-6 text-white shadow-xl relative overflow-hidden group cursor-pointer border border-blue-500/30 min-h-[280px] flex flex-col justify-between w-full max-w-full" 
+                 className="sm:col-span-2 bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 rounded-2xl p-6 text-white shadow-xl relative overflow-hidden group cursor-pointer border border-blue-500/30 min-h-[280px] flex flex-col justify-between w-full mx-auto" 
                  onClick={() => onNavigate('salary-accounts')}
                >
-                  <div className="relative z-10 flex flex-col justify-between h-full">
+                  <div className="relative z-10 flex flex-col justify-between h-full max-w-full">
                      <div>
                        <div className="flex items-center gap-2 mb-3">
                          <Badge className="bg-white/10 backdrop-blur-md hover:bg-white/20 text-white border-white/20 shadow-sm">Zero Balance</Badge>
@@ -373,8 +373,8 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                   <div className="absolute top-0 right-0 w-32 h-32 bg-blue-400 rounded-full mix-blend-overlay filter blur-3xl opacity-20 animate-blob"></div>
                </motion.div>
 
-               <div className="flex overflow-x-auto snap-x snap-mandatory pb-4 gap-4 sm:contents no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 overscroll-x-contain">
-                  <div className="min-w-[260px] sm:min-w-0 snap-center">
+               <div className="flex overflow-x-auto snap-x snap-mandatory pb-4 gap-4 sm:contents no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 overscroll-x-contain w-[calc(100%+2rem)] sm:w-auto">
+                  <div className="min-w-[260px] sm:min-w-0 snap-center flex-shrink-0">
                     <ProductCard 
                       icon={CreditCard} label="Credit Cards" subLabel="Lifetime Free & Cashback" 
                       colorClass="text-purple-600" bgClass="bg-purple-50"
@@ -400,7 +400,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
              transition={{ delay: 0.2 }}
           >
             <SectionHeader title="Smart Investments" icon={TrendingUp} color="bg-green-500 text-green-500" />
-            <div className="flex overflow-x-auto snap-x snap-mandatory pb-4 gap-4 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:pb-0 sm:gap-6 no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 overscroll-x-contain scrollbar-hide">
+            <div className="flex overflow-x-auto snap-x snap-mandatory pb-4 gap-4 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:pb-0 sm:gap-6 no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 overscroll-x-contain w-[calc(100%+2rem)] sm:w-auto">
               <div className="min-w-[240px] sm:min-w-0 snap-center h-full flex-shrink-0">
                 <ProductCard 
                   icon={PiggyBank} label="Fixed Deposits" subLabel="Higher rates for Corporates" tag="Safe"
@@ -440,7 +440,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
              transition={{ delay: 0.3 }}
           >
              <SectionHeader title="Instant Funds" icon={Banknote} color="bg-orange-500 text-orange-500" />
-             <div className="flex overflow-x-auto snap-x snap-mandatory pb-4 gap-4 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:pb-0 sm:gap-6 no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 overscroll-x-contain scrollbar-hide">
+             <div className="flex overflow-x-auto snap-x snap-mandatory pb-4 gap-4 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:pb-0 sm:gap-6 no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 overscroll-x-contain w-[calc(100%+2rem)] sm:w-auto">
                 <div className="min-w-[240px] sm:min-w-0 snap-center h-full flex-shrink-0">
                   <ProductCard 
                     icon={Banknote} label="Personal Loan" subLabel="Approval in 5 mins" 
