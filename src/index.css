@@ -102,6 +102,10 @@
     @apply bg-white/80 backdrop-blur-md border border-white/40 shadow-sm hover:shadow-md transition-all duration-300;
   }
 
+  .scroll-touch {
+    -webkit-overflow-scrolling: touch;
+  }
+
   .custom-scrollbar::-webkit-scrollbar {
     width: 4px;
     height: 4px;

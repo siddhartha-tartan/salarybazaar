@@ -94,6 +94,14 @@ const SectionHeader = ({ title, icon: Icon, color }: any) => (
   </motion.div>
 );
 
+const MobileCarousel = ({ children }: { children: React.ReactNode }) => (
+  <div className="-mx-4 px-4 overflow-x-auto no-scrollbar scroll-touch">
+    <div className="flex w-max gap-4 snap-x snap-mandatory">
+      {children}
+    </div>
+  </div>
+);
+
 export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -342,14 +350,14 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
              className="relative z-10"
           >
             <SectionHeader title="Maximize Your Salary" icon={Building2} color="bg-blue-500 text-blue-500" />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-full">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 min-w-0">
                {/* Hero Feature Card - Drives conversion for the main product */}
                <motion.div 
                  whileHover={{ y: -5, scale: 1.01 }}
-                 className="sm:col-span-2 bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 rounded-2xl p-6 text-white shadow-xl relative overflow-hidden group cursor-pointer border border-blue-500/30 min-h-[280px] flex flex-col justify-between w-full mx-auto" 
+                 className="sm:col-span-2 bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 rounded-2xl p-6 text-white shadow-xl relative overflow-hidden group cursor-pointer border border-blue-500/30 min-h-[280px] flex flex-col justify-between w-full min-w-0" 
                  onClick={() => onNavigate('salary-accounts')}
                >
-                  <div className="relative z-10 flex flex-col justify-between h-full max-w-full">
+                  <div className="relative z-10 flex flex-col justify-between h-full min-w-0">
                      <div>
                        <div className="flex items-center gap-2 mb-3">
                          <Badge className="bg-white/10 backdrop-blur-md hover:bg-white/20 text-white border-white/20 shadow-sm">Zero Balance</Badge>
@@ -373,21 +381,40 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                   <div className="absolute top-0 right-0 w-32 h-32 bg-blue-400 rounded-full mix-blend-overlay filter blur-3xl opacity-20 animate-blob"></div>
                </motion.div>
 
-               <div className="flex overflow-x-auto snap-x snap-mandatory pb-4 gap-4 sm:contents no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 overscroll-x-contain w-[calc(100%+2rem)] sm:w-auto">
-                  <div className="min-w-[260px] sm:min-w-0 snap-center flex-shrink-0">
-                    <ProductCard 
-                      icon={CreditCard} label="Credit Cards" subLabel="Lifetime Free & Cashback" 
-                      colorClass="text-purple-600" bgClass="bg-purple-50"
-                      onClick={() => onNavigate('salary-accounts')} 
-                    />
-                  </div>
-                  <div className="min-w-[260px] sm:min-w-0 snap-center">
-                    <ProductCard 
-                      icon={Gauge} label="Credit Score" subLabel="Check Report for Free" 
-                      colorClass="text-emerald-600" bgClass="bg-emerald-50"
-                      onClick={() => onNavigate('home')} 
-                    />
-                  </div>
+               {/* Mobile: swipeable cards */}
+               <div className="sm:hidden">
+                 <MobileCarousel>
+                   <div className="w-[82vw] max-w-[340px] snap-start shrink-0">
+                     <ProductCard 
+                       icon={CreditCard} label="Credit Cards" subLabel="Lifetime Free & Cashback" 
+                       colorClass="text-purple-600" bgClass="bg-purple-50"
+                       onClick={() => onNavigate('salary-accounts')} 
+                     />
+                   </div>
+                   <div className="w-[82vw] max-w-[340px] snap-start shrink-0">
+                     <ProductCard 
+                       icon={Gauge} label="Credit Score" subLabel="Check Report for Free" 
+                       colorClass="text-emerald-600" bgClass="bg-emerald-50"
+                       onClick={() => onNavigate('home')} 
+                     />
+                   </div>
+                 </MobileCarousel>
+               </div>
+
+               {/* Desktop/tablet: normal grid cards */}
+               <div className="hidden sm:block">
+                 <ProductCard 
+                   icon={CreditCard} label="Credit Cards" subLabel="Lifetime Free & Cashback" 
+                   colorClass="text-purple-600" bgClass="bg-purple-50"
+                   onClick={() => onNavigate('salary-accounts')} 
+                 />
+               </div>
+               <div className="hidden sm:block">
+                 <ProductCard 
+                   icon={Gauge} label="Credit Score" subLabel="Check Report for Free" 
+                   colorClass="text-emerald-600" bgClass="bg-emerald-50"
+                   onClick={() => onNavigate('home')} 
+                 />
                </div>
             </div>
           </motion.div>
@@ -400,35 +427,62 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
              transition={{ delay: 0.2 }}
           >
             <SectionHeader title="Smart Investments" icon={TrendingUp} color="bg-green-500 text-green-500" />
-            <div className="flex overflow-x-auto snap-x snap-mandatory pb-4 gap-4 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:pb-0 sm:gap-6 no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 overscroll-x-contain w-[calc(100%+2rem)] sm:w-auto">
-              <div className="min-w-[240px] sm:min-w-0 snap-center h-full flex-shrink-0">
-                <ProductCard 
-                  icon={PiggyBank} label="Fixed Deposits" subLabel="Higher rates for Corporates" tag="Safe"
-                  colorClass="text-green-600" bgClass="bg-green-50"
-                  onClick={() => onNavigate('investments')} 
-                />
-              </div>
-              <div className="min-w-[240px] sm:min-w-0 snap-center h-full">
-                <ProductCard 
-                  icon={Landmark} label="NPS (Pension)" subLabel="Save Tax up to ₹50k" 
-                  colorClass="text-teal-600" bgClass="bg-teal-50"
-                  onClick={() => onNavigate('investments')} 
-                />
-              </div>
-              <div className="min-w-[240px] sm:min-w-0 snap-center h-full">
-                <ProductCard 
-                  icon={TrendingUp} label="Mutual Funds" subLabel="Direct Plans, 0% Comm." 
-                  colorClass="text-emerald-600" bgClass="bg-emerald-50"
-                  onClick={() => onNavigate('investments')} 
-                />
-              </div>
-              <div className="min-w-[240px] sm:min-w-0 snap-center h-full">
-                <ProductCard 
-                  icon={Scroll} label="Digital Gold" subLabel="Buy, Sell or SIP" 
-                  colorClass="text-amber-500" bgClass="bg-amber-50"
-                  onClick={() => onNavigate('investments')} 
-                />
-              </div>
+            {/* Mobile: swipeable carousel */}
+            <div className="sm:hidden">
+              <MobileCarousel>
+                <div className="w-[76vw] max-w-[320px] snap-start shrink-0">
+                  <ProductCard 
+                    icon={PiggyBank} label="Fixed Deposits" subLabel="Higher rates for Corporates" tag="Safe"
+                    colorClass="text-green-600" bgClass="bg-green-50"
+                    onClick={() => onNavigate('investments')} 
+                  />
+                </div>
+                <div className="w-[76vw] max-w-[320px] snap-start shrink-0">
+                  <ProductCard 
+                    icon={Landmark} label="NPS (Pension)" subLabel="Save Tax up to ₹50k" 
+                    colorClass="text-teal-600" bgClass="bg-teal-50"
+                    onClick={() => onNavigate('investments')} 
+                  />
+                </div>
+                <div className="w-[76vw] max-w-[320px] snap-start shrink-0">
+                  <ProductCard 
+                    icon={TrendingUp} label="Mutual Funds" subLabel="Direct Plans, 0% Comm." 
+                    colorClass="text-emerald-600" bgClass="bg-emerald-50"
+                    onClick={() => onNavigate('investments')} 
+                  />
+                </div>
+                <div className="w-[76vw] max-w-[320px] snap-start shrink-0">
+                  <ProductCard 
+                    icon={Scroll} label="Digital Gold" subLabel="Buy, Sell or SIP" 
+                    colorClass="text-amber-500" bgClass="bg-amber-50"
+                    onClick={() => onNavigate('investments')} 
+                  />
+                </div>
+              </MobileCarousel>
+            </div>
+
+            {/* Desktop/tablet grid */}
+            <div className="hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-6">
+              <ProductCard 
+                icon={PiggyBank} label="Fixed Deposits" subLabel="Higher rates for Corporates" tag="Safe"
+                colorClass="text-green-600" bgClass="bg-green-50"
+                onClick={() => onNavigate('investments')} 
+              />
+              <ProductCard 
+                icon={Landmark} label="NPS (Pension)" subLabel="Save Tax up to ₹50k" 
+                colorClass="text-teal-600" bgClass="bg-teal-50"
+                onClick={() => onNavigate('investments')} 
+              />
+              <ProductCard 
+                icon={TrendingUp} label="Mutual Funds" subLabel="Direct Plans, 0% Comm." 
+                colorClass="text-emerald-600" bgClass="bg-emerald-50"
+                onClick={() => onNavigate('investments')} 
+              />
+              <ProductCard 
+                icon={Scroll} label="Digital Gold" subLabel="Buy, Sell or SIP" 
+                colorClass="text-amber-500" bgClass="bg-amber-50"
+                onClick={() => onNavigate('investments')} 
+              />
             </div>
           </motion.div>
 
@@ -440,31 +494,54 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
              transition={{ delay: 0.3 }}
           >
              <SectionHeader title="Instant Funds" icon={Banknote} color="bg-orange-500 text-orange-500" />
-             <div className="flex overflow-x-auto snap-x snap-mandatory pb-4 gap-4 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:pb-0 sm:gap-6 no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 overscroll-x-contain w-[calc(100%+2rem)] sm:w-auto">
-                <div className="min-w-[240px] sm:min-w-0 snap-center h-full flex-shrink-0">
-                  <ProductCard 
-                    icon={Banknote} label="Personal Loan" subLabel="Approval in 5 mins" 
-                    onClick={() => onNavigate('salary-accounts')} 
-                  />
-                </div>
-                <div className="min-w-[240px] sm:min-w-0 snap-center h-full">
-                  <ProductCard 
-                    icon={HomeIcon} label="Home Loan" subLabel="Balance Transfer Offers" 
-                    onClick={() => onNavigate('salary-accounts')} 
-                  />
-                </div>
-                <div className="min-w-[240px] sm:min-w-0 snap-center h-full">
-                  <ProductCard 
-                    icon={Briefcase} label="Business Loan" subLabel="Collateral Free Options" 
-                    onClick={() => onNavigate('salary-accounts')} 
-                  />
-                </div>
-                <div className="min-w-[240px] sm:min-w-0 snap-center h-full">
-                  <ProductCard 
-                    icon={Car} label="Car Loan" subLabel="Up to 100% On-Road Funding" 
-                    onClick={() => onNavigate('salary-accounts')} 
-                  />
-                </div>
+             {/* Mobile: swipeable carousel */}
+             <div className="sm:hidden">
+               <MobileCarousel>
+                 <div className="w-[76vw] max-w-[320px] snap-start shrink-0">
+                   <ProductCard 
+                     icon={Banknote} label="Personal Loan" subLabel="Approval in 5 mins" 
+                     onClick={() => onNavigate('salary-accounts')} 
+                   />
+                 </div>
+                 <div className="w-[76vw] max-w-[320px] snap-start shrink-0">
+                   <ProductCard 
+                     icon={HomeIcon} label="Home Loan" subLabel="Balance Transfer Offers" 
+                     onClick={() => onNavigate('salary-accounts')} 
+                   />
+                 </div>
+                 <div className="w-[76vw] max-w-[320px] snap-start shrink-0">
+                   <ProductCard 
+                     icon={Briefcase} label="Business Loan" subLabel="Collateral Free Options" 
+                     onClick={() => onNavigate('salary-accounts')} 
+                   />
+                 </div>
+                 <div className="w-[76vw] max-w-[320px] snap-start shrink-0">
+                   <ProductCard 
+                     icon={Car} label="Car Loan" subLabel="Up to 100% On-Road Funding" 
+                     onClick={() => onNavigate('salary-accounts')} 
+                   />
+                 </div>
+               </MobileCarousel>
+             </div>
+
+             {/* Desktop/tablet grid */}
+             <div className="hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-6">
+               <ProductCard 
+                 icon={Banknote} label="Personal Loan" subLabel="Approval in 5 mins" 
+                 onClick={() => onNavigate('salary-accounts')} 
+               />
+               <ProductCard 
+                 icon={HomeIcon} label="Home Loan" subLabel="Balance Transfer Offers" 
+                 onClick={() => onNavigate('salary-accounts')} 
+               />
+               <ProductCard 
+                 icon={Briefcase} label="Business Loan" subLabel="Collateral Free Options" 
+                 onClick={() => onNavigate('salary-accounts')} 
+               />
+               <ProductCard 
+                 icon={Car} label="Car Loan" subLabel="Up to 100% On-Road Funding" 
+                 onClick={() => onNavigate('salary-accounts')} 
+               />
              </div>
           </motion.div>
 
