@@ -85,12 +85,12 @@ const SectionHeader = ({ title, icon: Icon, color }: any) => (
     initial={{ opacity: 0, x: -20 }}
     whileInView={{ opacity: 1, x: 0 }}
     viewport={{ once: true }}
-    className="flex items-center gap-3 mb-6 mt-2 pb-2"
+    className="flex items-center gap-3 mb-4 sm:mb-6 mt-2 pb-2"
   >
     <div className={`p-2 rounded-lg ${color} bg-opacity-10 backdrop-blur-sm`}>
       <Icon className={`w-5 h-5 ${color.replace('bg-', 'text-')}`} />
     </div>
-    <h2 className="text-xl font-bold text-gray-900">{title}</h2>
+    <h2 className="text-lg sm:text-xl font-bold text-gray-900">{title}</h2>
   </motion.div>
 );
 
@@ -331,7 +331,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
 
       {/* Main Content Area */}
       {userType === 'individual' ? (
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-8 sm:space-y-12">
           
           {/* Priority 1: Salary & Banking (The Core) */}
           <motion.div
@@ -342,11 +342,11 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
              className="relative z-10"
           >
             <SectionHeader title="Maximize Your Salary" icon={Building2} color="bg-blue-500 text-blue-500" />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                {/* Hero Feature Card - Drives conversion for the main product */}
                <motion.div 
                  whileHover={{ y: -5, scale: 1.01 }}
-                 className="sm:col-span-2 bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 rounded-2xl p-6 text-white shadow-xl relative overflow-hidden group cursor-pointer border border-blue-500/30" 
+                 className="sm:col-span-2 bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 rounded-2xl p-6 text-white shadow-xl relative overflow-hidden group cursor-pointer border border-blue-500/30 min-h-[280px] flex flex-col justify-between w-full max-w-full" 
                  onClick={() => onNavigate('salary-accounts')}
                >
                   <div className="relative z-10 flex flex-col justify-between h-full">
@@ -361,7 +361,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                        </p>
                      </div>
                      <div className="mt-6">
-                        <Button variant="secondary" className="bg-white text-blue-700 hover:bg-blue-50 border-none font-semibold h-10 px-6 shadow-lg shadow-black/10 transition-all hover:scale-105 active:scale-95">
+                        <Button variant="secondary" className="bg-white text-blue-700 hover:bg-blue-50 border-none font-semibold h-10 px-6 shadow-lg shadow-black/10 transition-all hover:scale-105 active:scale-95 w-full sm:w-auto">
                           Compare & Apply <ArrowRight className="w-4 h-4 ml-2" />
                         </Button>
                      </div>
@@ -373,16 +373,22 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                   <div className="absolute top-0 right-0 w-32 h-32 bg-blue-400 rounded-full mix-blend-overlay filter blur-3xl opacity-20 animate-blob"></div>
                </motion.div>
 
-               <ProductCard 
-                icon={CreditCard} label="Credit Cards" subLabel="Lifetime Free & Cashback" 
-                colorClass="text-purple-600" bgClass="bg-purple-50"
-                onClick={() => onNavigate('salary-accounts')} 
-              />
-               <ProductCard 
-                icon={Gauge} label="Credit Score" subLabel="Check Report for Free" 
-                colorClass="text-emerald-600" bgClass="bg-emerald-50"
-                onClick={() => onNavigate('home')} 
-              />
+               <div className="flex overflow-x-auto snap-x snap-mandatory pb-4 gap-4 sm:contents no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 overscroll-x-contain">
+                  <div className="min-w-[260px] sm:min-w-0 snap-center">
+                    <ProductCard 
+                      icon={CreditCard} label="Credit Cards" subLabel="Lifetime Free & Cashback" 
+                      colorClass="text-purple-600" bgClass="bg-purple-50"
+                      onClick={() => onNavigate('salary-accounts')} 
+                    />
+                  </div>
+                  <div className="min-w-[260px] sm:min-w-0 snap-center">
+                    <ProductCard 
+                      icon={Gauge} label="Credit Score" subLabel="Check Report for Free" 
+                      colorClass="text-emerald-600" bgClass="bg-emerald-50"
+                      onClick={() => onNavigate('home')} 
+                    />
+                  </div>
+               </div>
             </div>
           </motion.div>
 
@@ -394,27 +400,35 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
              transition={{ delay: 0.2 }}
           >
             <SectionHeader title="Smart Investments" icon={TrendingUp} color="bg-green-500 text-green-500" />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              <ProductCard 
-                icon={PiggyBank} label="Fixed Deposits" subLabel="Higher rates for Corporates" tag="Safe"
-                colorClass="text-green-600" bgClass="bg-green-50"
-                onClick={() => onNavigate('investments')} 
-              />
-              <ProductCard 
-                icon={Landmark} label="NPS (Pension)" subLabel="Save Tax up to ₹50k" 
-                colorClass="text-teal-600" bgClass="bg-teal-50"
-                onClick={() => onNavigate('investments')} 
-              />
-              <ProductCard 
-                icon={TrendingUp} label="Mutual Funds" subLabel="Direct Plans, 0% Comm." 
-                colorClass="text-emerald-600" bgClass="bg-emerald-50"
-                onClick={() => onNavigate('investments')} 
-              />
-              <ProductCard 
-                icon={Scroll} label="Digital Gold" subLabel="Buy, Sell or SIP" 
-                colorClass="text-amber-500" bgClass="bg-amber-50"
-                onClick={() => onNavigate('investments')} 
-              />
+            <div className="flex overflow-x-auto snap-x snap-mandatory pb-4 gap-4 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:pb-0 sm:gap-6 no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 overscroll-x-contain scrollbar-hide">
+              <div className="min-w-[240px] sm:min-w-0 snap-center h-full flex-shrink-0">
+                <ProductCard 
+                  icon={PiggyBank} label="Fixed Deposits" subLabel="Higher rates for Corporates" tag="Safe"
+                  colorClass="text-green-600" bgClass="bg-green-50"
+                  onClick={() => onNavigate('investments')} 
+                />
+              </div>
+              <div className="min-w-[240px] sm:min-w-0 snap-center h-full">
+                <ProductCard 
+                  icon={Landmark} label="NPS (Pension)" subLabel="Save Tax up to ₹50k" 
+                  colorClass="text-teal-600" bgClass="bg-teal-50"
+                  onClick={() => onNavigate('investments')} 
+                />
+              </div>
+              <div className="min-w-[240px] sm:min-w-0 snap-center h-full">
+                <ProductCard 
+                  icon={TrendingUp} label="Mutual Funds" subLabel="Direct Plans, 0% Comm." 
+                  colorClass="text-emerald-600" bgClass="bg-emerald-50"
+                  onClick={() => onNavigate('investments')} 
+                />
+              </div>
+              <div className="min-w-[240px] sm:min-w-0 snap-center h-full">
+                <ProductCard 
+                  icon={Scroll} label="Digital Gold" subLabel="Buy, Sell or SIP" 
+                  colorClass="text-amber-500" bgClass="bg-amber-50"
+                  onClick={() => onNavigate('investments')} 
+                />
+              </div>
             </div>
           </motion.div>
 
@@ -426,23 +440,31 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
              transition={{ delay: 0.3 }}
           >
              <SectionHeader title="Instant Funds" icon={Banknote} color="bg-orange-500 text-orange-500" />
-             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <ProductCard 
-                  icon={Banknote} label="Personal Loan" subLabel="Approval in 5 mins" 
-                  onClick={() => onNavigate('salary-accounts')} 
-                />
-                <ProductCard 
-                  icon={HomeIcon} label="Home Loan" subLabel="Balance Transfer Offers" 
-                  onClick={() => onNavigate('salary-accounts')} 
-                />
-                <ProductCard 
-                  icon={Briefcase} label="Business Loan" subLabel="Collateral Free Options" 
-                  onClick={() => onNavigate('salary-accounts')} 
-                />
-                <ProductCard 
-                  icon={Car} label="Car Loan" subLabel="Up to 100% On-Road Funding" 
-                  onClick={() => onNavigate('salary-accounts')} 
-                />
+             <div className="flex overflow-x-auto snap-x snap-mandatory pb-4 gap-4 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:pb-0 sm:gap-6 no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 overscroll-x-contain scrollbar-hide">
+                <div className="min-w-[240px] sm:min-w-0 snap-center h-full flex-shrink-0">
+                  <ProductCard 
+                    icon={Banknote} label="Personal Loan" subLabel="Approval in 5 mins" 
+                    onClick={() => onNavigate('salary-accounts')} 
+                  />
+                </div>
+                <div className="min-w-[240px] sm:min-w-0 snap-center h-full">
+                  <ProductCard 
+                    icon={HomeIcon} label="Home Loan" subLabel="Balance Transfer Offers" 
+                    onClick={() => onNavigate('salary-accounts')} 
+                  />
+                </div>
+                <div className="min-w-[240px] sm:min-w-0 snap-center h-full">
+                  <ProductCard 
+                    icon={Briefcase} label="Business Loan" subLabel="Collateral Free Options" 
+                    onClick={() => onNavigate('salary-accounts')} 
+                  />
+                </div>
+                <div className="min-w-[240px] sm:min-w-0 snap-center h-full">
+                  <ProductCard 
+                    icon={Car} label="Car Loan" subLabel="Up to 100% On-Road Funding" 
+                    onClick={() => onNavigate('salary-accounts')} 
+                  />
+                </div>
              </div>
           </motion.div>
 

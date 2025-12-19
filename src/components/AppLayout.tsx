@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Phone, User, Search } from "lucide-react";
+import { Phone, User, Search, Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -13,8 +14,10 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
   onNavigate,
   currentPage 
 }) => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
-    <div className="min-h-screen flex flex-col font-sans text-gray-900 bg-transparent selection:bg-blue-100">
+    <div className="min-h-screen flex flex-col font-sans text-gray-900 bg-transparent selection:bg-blue-100 overflow-x-hidden">
       {/* Decorative Background Blobs */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-200/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
@@ -60,7 +63,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
           </nav>
 
           {/* Right Actions - Talk to Expert & Sign In */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4 lg:gap-6">
              {/* Talk to Expert Block */}
              <div className="hidden md:flex items-center gap-3 border-r border-gray-200/50 pr-6">
                 <div className="text-right">
@@ -73,7 +76,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
              </div>
 
              {/* Sign In Block */}
-             <div className="flex items-center gap-4">
+             <div className="hidden md:flex items-center gap-4">
                 <button 
                     className="flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-blue-600 transition-colors group"
                     onClick={() => console.log("Sign In")}
@@ -84,9 +87,70 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
                     <span className="hidden sm:inline">Sign In</span>
                 </button>
              </div>
+
+             {/* Mobile Sign In (Icon Only) */}
+             <button 
+                className="md:hidden p-2 text-gray-600 hover:bg-gray-100 rounded-full"
+                onClick={() => console.log("Sign In")}
+             >
+                <User className="w-6 h-6" />
+             </button>
+
+             {/* Mobile Menu Toggle */}
+             <button 
+               className="lg:hidden p-2 text-gray-600 hover:bg-gray-100 rounded-lg"
+               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+             >
+               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+             </button>
           </div>
         </div>
       </header>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="lg:hidden bg-white/95 backdrop-blur-xl border-b border-gray-200 fixed top-20 left-0 right-0 z-40 overflow-hidden"
+          >
+            <div className="p-4 space-y-4">
+              <Button 
+                variant="ghost" 
+                onClick={() => { onNavigate('marketplace'); setIsMobileMenuOpen(false); }}
+                className="w-full justify-start text-base font-semibold h-12"
+              >
+                <Search className="w-5 h-5 mr-3" />
+                Explore Products
+              </Button>
+              <Button 
+                variant="ghost" 
+                onClick={() => { onNavigate('corporate'); setIsMobileMenuOpen(false); }}
+                className="w-full justify-start text-base font-semibold h-12"
+              >
+                For Corporates
+              </Button>
+              <div className="h-px bg-gray-100 my-2" />
+              <div className="flex items-center justify-between p-2">
+                 <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center text-green-600">
+                        <Phone className="w-5 h-5" />
+                    </div>
+                    <div>
+                        <p className="text-xs font-bold text-gray-400 uppercase">Expert Helpline</p>
+                        <p className="text-sm font-bold text-gray-800">1800-570-3888</p>
+                    </div>
+                 </div>
+              </div>
+              <Button className="w-full bg-blue-600 text-white h-12 text-base font-bold rounded-xl mt-4">
+                Sign In
+              </Button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Main Content */}
       <main className="flex-1 relative z-10">

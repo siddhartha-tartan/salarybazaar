@@ -3,6 +3,7 @@ import { AppLayout } from "./components/AppLayout";
 import { Dashboard } from "./components/Dashboard";
 import { Home } from "./components/Home";
 import { CorporateLanding } from "./components/CorporateLanding";
+import { PolicySelector } from "./components/PolicySelector";
 
 function AppContent() {
   const [currentPage, setCurrentPage] = useState<string>('home');
@@ -39,6 +40,10 @@ function AppContent() {
            onNavigate={handleNavigate} 
            initialCategory={initialCategory}
         />
+      )}
+
+      {currentPage === 'selector' && (
+        <PolicySelector />
       )}
       
       {currentPage === 'corporate' && (

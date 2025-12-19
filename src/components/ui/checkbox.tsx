@@ -1,6 +1,6 @@
 import * as React from "react"
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
-import { Check } from "lucide-react"
+import { Check, Minus } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
@@ -17,9 +17,10 @@ const Checkbox = React.forwardRef<
     {...props}
   >
     <CheckboxPrimitive.Indicator
-      className={cn("grid place-content-center text-current")}
+      className={cn("grid place-content-center text-current group")}
     >
-      <Check className="h-4 w-4" />
+      <Check className="h-4 w-4 group-data-[state=indeterminate]:hidden" />
+      <Minus className="h-4 w-4 hidden group-data-[state=indeterminate]:block" />
     </CheckboxPrimitive.Indicator>
   </CheckboxPrimitive.Root>
 ))

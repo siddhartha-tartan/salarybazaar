@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Filter, Star, ChevronDown, Building2, TrendingUp, PiggyBank } from 'lucide-react';
+import { Check, Filter, Star, ChevronDown, Building2, TrendingUp, PiggyBank, ShieldCheck, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface ProductListingProps {
   category: 'salary-accounts' | 'investments';
@@ -73,25 +74,79 @@ const INVESTMENT_PRODUCTS = [
 export const ProductListing: React.FC<ProductListingProps> = ({ category, onNavigate }) => {
   const isSalary = category === 'salary-accounts';
   const products = isSalary ? SALARY_PRODUCTS : INVESTMENT_PRODUCTS;
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+
+  const FilterSidebar = () => (
+    <div className="space-y-6">
+      <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+        <div className="flex items-center gap-2 font-bold text-gray-900 mb-4 border-b border-gray-100 pb-2">
+          <Filter className="w-4 h-4" /> Filters
+        </div>
+        
+        <div className="space-y-6">
+          <div>
+             <label className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3 block">Provider</label>
+             <div className="space-y-2">
+                {['HDFC Bank', 'Axis Bank', 'SBI', 'ICICI Bank'].map(bank => (
+                  <label key={bank} className="flex items-center gap-2 text-sm text-gray-700 hover:text-blue-600 cursor-pointer">
+                     <input type="checkbox" className="rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+                     {bank}
+                  </label>
+                ))}
+             </div>
+          </div>
+
+          <div>
+             <label className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3 block">Features</label>
+             <div className="space-y-2">
+                {['Zero Balance', 'Free Credit Card', 'Cashback', 'Lounge Access'].map(feat => (
+                  <label key={feat} className="flex items-center gap-2 text-sm text-gray-700 hover:text-blue-600 cursor-pointer">
+                     <input type="checkbox" className="rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+                     {feat}
+                  </label>
+                ))}
+             </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Trust Banner */}
+      <div className="bg-blue-50 p-5 rounded-xl border border-blue-100 text-center">
+         <ShieldCheck className="w-10 h-10 text-blue-600 mx-auto mb-2" />
+         <h4 className="font-bold text-blue-900">100% Paperless</h4>
+         <p className="text-xs text-blue-700 mt-1">Open your account instantly using Video KYC.</p>
+      </div>
+    </div>
+  );
 
   return (
     <div className="bg-gray-50 min-h-screen pb-20">
       {/* Header */}
       <div className="bg-white border-b border-gray-200 sticky top-20 z-20 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="w-full sm:w-auto">
              <div className="flex items-center gap-2 text-sm text-gray-500 mb-1">
                 <span className="cursor-pointer hover:text-blue-600" onClick={() => onNavigate('home')}>Home</span>
                 <span>/</span>
                 <span className="font-medium text-gray-900 capitalize">{category.replace('-', ' ')}</span>
              </div>
-             <h1 className="text-2xl font-bold text-gray-900">
-               {isSalary ? 'Compare Salary Accounts' : 'Top Investment Options'}
-             </h1>
+             <div className="flex items-center justify-between w-full sm:w-auto">
+               <h1 className="text-2xl font-bold text-gray-900">
+                 {isSalary ? 'Compare Salary Accounts' : 'Top Investment Options'}
+               </h1>
+               <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="lg:hidden ml-4"
+                  onClick={() => setIsFilterOpen(true)}
+               >
+                  <Filter className="w-4 h-4 mr-2" /> Filter
+               </Button>
+             </div>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 w-full sm:w-auto">
              <span className="text-sm text-gray-500 hidden sm:inline">Sort by:</span>
-             <select className="bg-gray-50 border border-gray-200 text-sm rounded-lg p-2.5 outline-none focus:ring-2 focus:ring-blue-500">
+             <select className="bg-gray-50 border border-gray-200 text-sm rounded-lg p-2.5 outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-auto">
                 <option>Popularity</option>
                 <option>Interest Rate: High to Low</option>
              </select>
@@ -99,49 +154,44 @@ export const ProductListing: React.FC<ProductListingProps> = ({ category, onNavi
         </div>
       </div>
 
+      {/* Mobile Filter Sheet */}
+      <AnimatePresence>
+        {isFilterOpen && (
+          <>
+             <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 bg-black/20 z-40 backdrop-blur-sm lg:hidden"
+                onClick={() => setIsFilterOpen(false)}
+             />
+             <motion.div 
+                initial={{ x: '100%' }}
+                animate={{ x: 0 }}
+                exit={{ x: '100%' }}
+                transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                className="fixed inset-y-0 right-0 w-80 bg-white z-50 shadow-2xl overflow-y-auto lg:hidden pt-20" // added pt-20 to avoid overlap with header if z-index issue
+             >
+                <div className="p-4 border-b border-gray-100 flex items-center justify-between sticky top-0 bg-white z-10">
+                   <h2 className="font-bold text-lg">Filters</h2>
+                   <Button variant="ghost" size="sm" onClick={() => setIsFilterOpen(false)}>
+                      <X className="w-5 h-5" />
+                   </Button>
+                </div>
+                <div className="p-4">
+                   <FilterSidebar />
+                </div>
+             </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           
           {/* LEFT SIDEBAR FILTERS (Desktop) */}
           <div className="hidden lg:block space-y-6">
-            <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
-              <div className="flex items-center gap-2 font-bold text-gray-900 mb-4 border-b border-gray-100 pb-2">
-                <Filter className="w-4 h-4" /> Filters
-              </div>
-              
-              <div className="space-y-6">
-                <div>
-                   <label className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3 block">Provider</label>
-                   <div className="space-y-2">
-                      {['HDFC Bank', 'Axis Bank', 'SBI', 'ICICI Bank'].map(bank => (
-                        <label key={bank} className="flex items-center gap-2 text-sm text-gray-700 hover:text-blue-600 cursor-pointer">
-                           <input type="checkbox" className="rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
-                           {bank}
-                        </label>
-                      ))}
-                   </div>
-                </div>
-
-                <div>
-                   <label className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3 block">Features</label>
-                   <div className="space-y-2">
-                      {['Zero Balance', 'Free Credit Card', 'Cashback', 'Lounge Access'].map(feat => (
-                        <label key={feat} className="flex items-center gap-2 text-sm text-gray-700 hover:text-blue-600 cursor-pointer">
-                           <input type="checkbox" className="rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
-                           {feat}
-                        </label>
-                      ))}
-                   </div>
-                </div>
-              </div>
-            </div>
-            
-            {/* Trust Banner */}
-            <div className="bg-blue-50 p-5 rounded-xl border border-blue-100 text-center">
-               <ShieldCheck className="w-10 h-10 text-blue-600 mx-auto mb-2" />
-               <h4 className="font-bold text-blue-900">100% Paperless</h4>
-               <p className="text-xs text-blue-700 mt-1">Open your account instantly using Video KYC.</p>
-            </div>
+            <FilterSidebar />
           </div>
 
           {/* MAIN LISTING AREA */}

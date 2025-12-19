@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { 
   Building2, Briefcase, PiggyBank, TrendingUp, ShieldCheck, 
-  Filter, Search, ArrowRight, Star, Wallet, CreditCard
+  Filter, Search, ArrowRight, Star, Wallet, CreditCard, X
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -199,6 +199,7 @@ export const Dashboard: React.FC<MarketplaceProps> = ({ initialCategory = 'all',
   const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory === 'investments' ? 'investment' : initialCategory === 'salary-accounts' ? 'salary-account' : 'all');
   const [selectedProviders, setSelectedProviders] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   // Normalize initial category on mount if needed, or just rely on state
   // Note: 'view' prop from App.tsx maps to 'initialCategory' here.
@@ -232,6 +233,71 @@ export const Dashboard: React.FC<MarketplaceProps> = ({ initialCategory = 'all',
     }
   };
 
+  const SidebarContent = () => (
+    <div className="space-y-8">
+       {/* Category Filter */}
+       <motion.div 
+         initial={{ x: -20, opacity: 0 }}
+         animate={{ x: 0, opacity: 1 }}
+         transition={{ delay: 0.1 }}
+         className="space-y-3 glass p-4 rounded-2xl"
+       >
+          <h3 className="font-bold text-gray-900 flex items-center gap-2 text-sm uppercase tracking-wide">
+            <Filter className="w-4 h-4" /> Categories
+          </h3>
+          <div className="space-y-1">
+            {[
+              { id: 'all', label: 'All Products' },
+              { id: 'salary-account', label: 'Salary Accounts' },
+              { id: 'investment', label: 'Investments' },
+              { id: 'loan', label: 'Loans' },
+              { id: 'card', label: 'Credit Cards' }
+            ].map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => { setSelectedCategory(cat.id); setIsFilterOpen(false); }}
+                className={`w-full text-left px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
+                  selectedCategory === cat.id 
+                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' 
+                    : 'text-gray-600 hover:bg-white/60'
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+       </motion.div>
+
+       {/* Provider Filter */}
+       <motion.div 
+         initial={{ x: -20, opacity: 0 }}
+         animate={{ x: 0, opacity: 1 }}
+         transition={{ delay: 0.2 }}
+         className="space-y-3 glass p-4 rounded-2xl"
+       >
+          <h3 className="font-bold text-gray-900 text-sm uppercase tracking-wide">Providers</h3>
+          <div className="space-y-3">
+             {providers.map(provider => (
+               <div key={provider} className="flex items-center space-x-3">
+                  <Checkbox 
+                    id={`provider-${provider}`}
+                    checked={selectedProviders.includes(provider)}
+                    onCheckedChange={() => toggleProvider(provider)}
+                    className="border-gray-300 data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
+                  />
+                  <label 
+                    htmlFor={`provider-${provider}`} 
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-600 cursor-pointer select-none"
+                  >
+                    {provider}
+                  </label>
+               </div>
+             ))}
+          </div>
+       </motion.div>
+    </div>
+  );
+
   return (
     <div className="min-h-screen pb-10">
       {/* Marketplace Header */}
@@ -240,13 +306,24 @@ export const Dashboard: React.FC<MarketplaceProps> = ({ initialCategory = 'all',
         animate={{ y: 0, opacity: 1 }}
         className="glass border-b border-white/20 sticky top-20 z-20"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
-           <div className="flex items-center gap-2 text-gray-800 font-bold text-xl">
-              Marketplace
-              <span className="text-sm font-normal text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-100">{filteredProducts.length}</span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-auto md:h-16 py-3 md:py-0 flex flex-col md:flex-row items-center justify-between gap-4">
+           <div className="flex w-full md:w-auto items-center justify-between gap-2 text-gray-800 font-bold text-xl">
+              <div className="flex items-center gap-2">
+                Marketplace
+                <span className="text-sm font-normal text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-100">{filteredProducts.length}</span>
+              </div>
+              
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="md:hidden flex items-center gap-2"
+                onClick={() => setIsFilterOpen(true)}
+              >
+                <Filter className="w-4 h-4" /> Filters
+              </Button>
            </div>
            
-           <div className="flex-1 max-w-md relative hidden md:block group">
+           <div className="w-full md:flex-1 md:max-w-md relative group">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-focus-within:text-blue-500 transition-colors" />
               <input 
                 type="text" 
@@ -259,71 +336,44 @@ export const Dashboard: React.FC<MarketplaceProps> = ({ initialCategory = 'all',
         </div>
       </motion.div>
 
+      {/* Mobile Filters Sheet */}
+      <AnimatePresence>
+        {isFilterOpen && (
+          <>
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/20 z-40 backdrop-blur-sm md:hidden"
+              onClick={() => setIsFilterOpen(false)}
+            />
+            <motion.div 
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="fixed inset-y-0 right-0 w-80 bg-white z-50 shadow-2xl overflow-y-auto md:hidden"
+            >
+              <div className="p-4 border-b border-gray-100 flex items-center justify-between sticky top-0 bg-white z-10">
+                <h2 className="font-bold text-lg">Filters</h2>
+                <Button variant="ghost" size="sm" onClick={() => setIsFilterOpen(false)}>
+                  <X className="w-5 h-5" />
+                </Button>
+              </div>
+              <div className="p-4">
+                <SidebarContent />
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col md:flex-row gap-8">
           
-          {/* Sidebar Filters */}
-          <aside className="w-full md:w-64 flex-shrink-0 space-y-8">
-             {/* Category Filter */}
-             <motion.div 
-               initial={{ x: -20, opacity: 0 }}
-               animate={{ x: 0, opacity: 1 }}
-               transition={{ delay: 0.1 }}
-               className="space-y-3 glass p-4 rounded-2xl"
-             >
-                <h3 className="font-bold text-gray-900 flex items-center gap-2 text-sm uppercase tracking-wide">
-                  <Filter className="w-4 h-4" /> Categories
-                </h3>
-                <div className="space-y-1">
-                  {[
-                    { id: 'all', label: 'All Products' },
-                    { id: 'salary-account', label: 'Salary Accounts' },
-                    { id: 'investment', label: 'Investments' },
-                    { id: 'loan', label: 'Loans' },
-                    { id: 'card', label: 'Credit Cards' }
-                  ].map((cat) => (
-                    <button
-                      key={cat.id}
-                      onClick={() => setSelectedCategory(cat.id)}
-                      className={`w-full text-left px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
-                        selectedCategory === cat.id 
-                          ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' 
-                          : 'text-gray-600 hover:bg-white/60'
-                      }`}
-                    >
-                      {cat.label}
-                    </button>
-                  ))}
-                </div>
-             </motion.div>
-
-             {/* Provider Filter */}
-             <motion.div 
-               initial={{ x: -20, opacity: 0 }}
-               animate={{ x: 0, opacity: 1 }}
-               transition={{ delay: 0.2 }}
-               className="space-y-3 glass p-4 rounded-2xl"
-             >
-                <h3 className="font-bold text-gray-900 text-sm uppercase tracking-wide">Providers</h3>
-                <div className="space-y-3">
-                   {providers.map(provider => (
-                     <div key={provider} className="flex items-center space-x-3">
-                        <Checkbox 
-                          id={provider} 
-                          checked={selectedProviders.includes(provider)}
-                          onCheckedChange={() => toggleProvider(provider)}
-                          className="border-gray-300 data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
-                        />
-                        <label 
-                          htmlFor={provider} 
-                          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-600 cursor-pointer select-none"
-                        >
-                          {provider}
-                        </label>
-                     </div>
-                   ))}
-                </div>
-             </motion.div>
+          {/* Sidebar Filters (Desktop) */}
+          <aside className="hidden md:block w-64 flex-shrink-0">
+             <SidebarContent />
           </aside>
 
           {/* Product Grid */}
