@@ -298,10 +298,12 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                         style={{ transform: `translate(${x}px, ${y}px)` }}
                         title={brand.name}
                       >
-                        <img
+                        <motion.img
                           src={brand.logo}
                           alt={`${brand.name} logo`}
                           className="w-8 h-8 object-contain select-none"
+                          animate={{ rotate: -360 }}
+                          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                           draggable={false}
                           loading="lazy"
                           decoding="async"
@@ -330,10 +332,12 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                         style={{ transform: `translate(${x}px, ${y}px)` }}
                         title={brand.name}
                       >
-                        <img
+                        <motion.img
                           src={brand.logo}
                           alt={`${brand.name} logo`}
                           className="w-7 h-7 object-contain select-none"
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
                           draggable={false}
                           loading="lazy"
                           decoding="async"
