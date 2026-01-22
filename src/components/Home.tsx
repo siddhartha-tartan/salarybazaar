@@ -290,8 +290,6 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                    <motion.div
                       key={brand.name}
                       className="absolute z-20"
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                       style={{ width: '100%', height: '100%', position: 'absolute', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                    >
                       <motion.div
@@ -300,12 +298,10 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                         style={{ transform: `translate(${x}px, ${y}px)` }}
                         title={brand.name}
                       >
-                        <motion.img
+                        <img
                           src={brand.logo}
                           alt={`${brand.name} logo`}
                           className="w-8 h-8 object-contain select-none"
-                          animate={{ rotate: -360 }}
-                          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                           draggable={false}
                           loading="lazy"
                           decoding="async"
@@ -326,8 +322,6 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                    <motion.div
                       key={brand.name}
                       className="absolute z-10"
-                      animate={{ rotate: -360 }}
-                      transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
                       style={{ width: '100%', height: '100%', position: 'absolute', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                    >
                       <motion.div
@@ -336,12 +330,10 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                         style={{ transform: `translate(${x}px, ${y}px)` }}
                         title={brand.name}
                       >
-                        <motion.img
+                        <img
                           src={brand.logo}
                           alt={`${brand.name} logo`}
                           className="w-7 h-7 object-contain select-none"
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
                           draggable={false}
                           loading="lazy"
                           decoding="async"
