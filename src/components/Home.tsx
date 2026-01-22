@@ -31,15 +31,15 @@ const ALL_PRODUCTS = [
 
 const POPULAR_SEARCHES = ['Salary Account', 'Fixed Deposit', 'HDFC Bank', 'Credit Score'];
 const BRANDS = [
-  { name: 'HDFC', color: 'bg-blue-600' },
-  { name: 'AXIS', color: 'bg-red-700' },
-  { name: 'SBI', color: 'bg-blue-400' },
-  { name: 'ICICI', color: 'bg-orange-600' },
-  { name: 'KOTAK', color: 'bg-red-600' },
-  { name: 'BAJAJ', color: 'bg-blue-800' },
-  { name: 'TATA', color: 'bg-blue-900' },
-  { name: 'LIC', color: 'bg-yellow-500' },
-  { name: 'BOB', color: 'bg-orange-500' }
+  { name: 'HDFC Bank', logo: new URL("../../logos/Bank Name=HDFC Bank.png", import.meta.url).href },
+  { name: 'State Bank of India', logo: new URL("../../logos/Bank Name=State Bank of India.png", import.meta.url).href },
+  { name: 'ICICI Bank', logo: new URL("../../logos/Bank Name=ICICI Bank.png", import.meta.url).href },
+  { name: 'Kotak Mahindra Bank', logo: new URL("../../logos/Bank Name=Kotak Mahindra Bank.png", import.meta.url).href },
+  { name: 'Union Bank', logo: new URL("../../logos/Bank Name=Union Bank.png", import.meta.url).href },
+  { name: 'Bandhan Bank', logo: new URL("../../logos/Bank Name=Bandhan Bank.png", import.meta.url).href },
+  { name: 'AU Small Finance Bank', logo: new URL("../../logos/Bank Name=AU Small Finance Bank.png", import.meta.url).href },
+  { name: 'RBL Bank', logo: new URL("../../logos/Bank Name=RBL Bank.png", import.meta.url).href },
+  { name: 'Ujjivan Small Finance Bank', logo: new URL("../../logos/Bank Name=Ujjivan Small Finance Bank.png", import.meta.url).href }
 ];
 
 // --- Components ---
@@ -294,13 +294,22 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                       transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                       style={{ width: '100%', height: '100%', position: 'absolute', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                    >
-                      <motion.div 
-                        className={`w-12 h-12 rounded-full ${brand.color} text-white flex items-center justify-center font-bold text-xs shadow-lg border-2 border-white transform hover:scale-125 transition-transform cursor-pointer`}
+                      <motion.div
+                        whileHover={{ scale: 1.15 }}
+                        className="w-12 h-12 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg border border-white/70 cursor-pointer overflow-hidden"
                         style={{ transform: `translate(${x}px, ${y}px)` }}
+                        title={brand.name}
                       >
-                         <motion.span animate={{ rotate: -360 }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }}>
-                            {brand.name.substring(0, 2)}
-                         </motion.span>
+                        <motion.img
+                          src={brand.logo}
+                          alt={`${brand.name} logo`}
+                          className="w-8 h-8 object-contain select-none"
+                          animate={{ rotate: -360 }}
+                          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                          draggable={false}
+                          loading="lazy"
+                          decoding="async"
+                        />
                       </motion.div>
                    </motion.div>
                 )
@@ -321,13 +330,22 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                       transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
                       style={{ width: '100%', height: '100%', position: 'absolute', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                    >
-                      <motion.div 
-                        className={`w-10 h-10 rounded-full bg-white text-gray-600 flex items-center justify-center font-bold text-[10px] shadow-md border border-gray-100 transform hover:scale-125 transition-transform cursor-pointer`}
+                      <motion.div
+                        whileHover={{ scale: 1.15 }}
+                        className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-md border border-gray-100 cursor-pointer overflow-hidden"
                         style={{ transform: `translate(${x}px, ${y}px)` }}
+                        title={brand.name}
                       >
-                         <motion.span animate={{ rotate: 360 }} transition={{ duration: 35, repeat: Infinity, ease: "linear" }}>
-                            {brand.name}
-                         </motion.span>
+                        <motion.img
+                          src={brand.logo}
+                          alt={`${brand.name} logo`}
+                          className="w-7 h-7 object-contain select-none"
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+                          draggable={false}
+                          loading="lazy"
+                          decoding="async"
+                        />
                       </motion.div>
                    </motion.div>
                 )
