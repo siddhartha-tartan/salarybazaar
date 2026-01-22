@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Phone, User, Search, Menu, X } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { goToAuthLink } from "@/lib/authLinks";
+import { Phone, User, Search, Menu, X, Building2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface AppLayoutProps {
@@ -77,24 +85,110 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
 
              {/* Sign In Block */}
              <div className="hidden md:flex items-center gap-4">
-                <button 
-                    className="flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-blue-600 transition-colors group"
-                    onClick={() => console.log("Sign In")}
-                >
-                    <div className="w-9 h-9 bg-gray-100/80 rounded-full flex items-center justify-center text-gray-600 group-hover:bg-blue-50 group-hover:text-blue-600 transition-all shadow-sm">
-                        <User className="w-4 h-4" />
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <button 
+                        className="flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-blue-600 transition-colors group"
+                    >
+                        <div className="w-9 h-9 bg-gray-100/80 rounded-full flex items-center justify-center text-gray-600 group-hover:bg-blue-50 group-hover:text-blue-600 transition-all shadow-sm">
+                            <User className="w-4 h-4" />
+                        </div>
+                        <span className="hidden sm:inline">Sign In</span>
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-72 p-2">
+                    <div className="px-2 pb-2">
+                      <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Sign in as</p>
                     </div>
-                    <span className="hidden sm:inline">Sign In</span>
-                </button>
+                    <DropdownMenuItem
+                      onSelect={(e) => {
+                        e.preventDefault();
+                        goToAuthLink("employeeSignIn");
+                      }}
+                      className="rounded-xl py-2.5 focus:bg-blue-50"
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className="mt-0.5 w-9 h-9 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+                          <User className="w-4 h-4" />
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="font-semibold text-gray-900">Employee Sign In</span>
+                          <span className="text-xs text-gray-500">For salaried users</span>
+                        </div>
+                      </div>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onSelect={(e) => {
+                        e.preventDefault();
+                        goToAuthLink("corporateLogin");
+                      }}
+                      className="rounded-xl py-2.5 focus:bg-indigo-50"
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className="mt-0.5 w-9 h-9 rounded-lg bg-indigo-50 text-indigo-700 flex items-center justify-center">
+                          <Building2 className="w-4 h-4" />
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="font-semibold text-gray-900">Corporate Login</span>
+                          <span className="text-xs text-gray-500">For HR (new & existing)</span>
+                        </div>
+                      </div>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
              </div>
 
              {/* Mobile Sign In (Icon Only) */}
-             <button 
-                className="md:hidden p-2 text-gray-600 hover:bg-gray-100 rounded-full"
-                onClick={() => console.log("Sign In")}
-             >
-                <User className="w-6 h-6" />
-             </button>
+             <div className="md:hidden">
+               <DropdownMenu>
+                 <DropdownMenuTrigger asChild>
+                   <button 
+                      className="p-2 text-gray-600 hover:bg-gray-100 rounded-full"
+                   >
+                      <User className="w-6 h-6" />
+                   </button>
+                 </DropdownMenuTrigger>
+                 <DropdownMenuContent align="end" className="w-72 p-2">
+                   <div className="px-2 pb-2">
+                     <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Sign in as</p>
+                   </div>
+                   <DropdownMenuItem
+                     onSelect={(e) => {
+                       e.preventDefault();
+                       goToAuthLink("employeeSignIn");
+                     }}
+                     className="rounded-xl py-2.5 focus:bg-blue-50"
+                   >
+                     <div className="flex items-start gap-3">
+                       <div className="mt-0.5 w-9 h-9 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+                         <User className="w-4 h-4" />
+                       </div>
+                       <div className="flex flex-col">
+                         <span className="font-semibold text-gray-900">Employee Sign In</span>
+                         <span className="text-xs text-gray-500">For salaried users</span>
+                       </div>
+                     </div>
+                   </DropdownMenuItem>
+                   <DropdownMenuItem
+                     onSelect={(e) => {
+                       e.preventDefault();
+                       goToAuthLink("corporateLogin");
+                     }}
+                     className="rounded-xl py-2.5 focus:bg-indigo-50"
+                   >
+                     <div className="flex items-start gap-3">
+                       <div className="mt-0.5 w-9 h-9 rounded-lg bg-indigo-50 text-indigo-700 flex items-center justify-center">
+                         <Building2 className="w-4 h-4" />
+                       </div>
+                       <div className="flex flex-col">
+                         <span className="font-semibold text-gray-900">Corporate Login</span>
+                         <span className="text-xs text-gray-500">For HR (new & existing)</span>
+                       </div>
+                     </div>
+                   </DropdownMenuItem>
+                 </DropdownMenuContent>
+               </DropdownMenu>
+             </div>
 
              {/* Mobile Menu Toggle */}
              <button 
@@ -144,9 +238,23 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
                     </div>
                  </div>
               </div>
-              <Button className="w-full bg-blue-600 text-white h-12 text-base font-bold rounded-xl mt-4">
-                Sign In
-              </Button>
+              <div className="space-y-2 pt-2">
+                <Button
+                  className="w-full bg-blue-600 text-white h-12 text-base font-bold rounded-xl"
+                  onClick={() => goToAuthLink("employeeSignIn")}
+                >
+                  Employee Sign In
+                </Button>
+                <div className="grid grid-cols-2 gap-2">
+                  <Button
+                    variant="outline"
+                    className="h-12 rounded-xl"
+                    onClick={() => goToAuthLink("corporateLogin")}
+                  >
+                    Corporate Login
+                  </Button>
+                </div>
+              </div>
             </div>
           </motion.div>
         )}

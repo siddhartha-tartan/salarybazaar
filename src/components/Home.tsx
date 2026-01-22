@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { motion, AnimatePresence } from 'framer-motion';
+import { goToAuthLink } from "@/lib/authLinks";
 
 interface HomeProps {
   onNavigate: (page: string) => void;
@@ -21,17 +22,12 @@ const ALL_PRODUCTS = [
   { id: 'fd', label: 'Fixed Deposits', category: 'Invest', icon: PiggyBank, subLabel: 'Up to 8.60% p.a.', path: 'investments' },
   { id: 'nps', label: 'NPS (Pension)', category: 'Invest', icon: Landmark, subLabel: 'Tax Saving', path: 'investments' },
   { id: 'mutual-funds', label: 'Mutual Funds', category: 'Invest', icon: TrendingUp, subLabel: '0% Commission', path: 'investments' },
-  { id: 'personal-loan', label: 'Personal Loan', category: 'Loans', icon: Banknote, subLabel: 'Rates from 10.49%', path: 'salary-accounts' },
-  { id: 'credit-cards', label: 'Credit Cards', category: 'Cards', icon: CreditCard, subLabel: 'Lifetime Free Options', path: 'salary-accounts' },
-  { id: 'home-loan', label: 'Home Loan', category: 'Loans', icon: HomeIcon, subLabel: 'Lowest Interest Rates', path: 'salary-accounts' },
-  { id: 'credit-score', label: 'Credit Score', category: 'Utility', icon: Gauge, subLabel: 'Check for Free', path: 'home' },
   { id: 'health-ins', label: 'Health Insurance', category: 'Insurance', icon: Heart, subLabel: 'Cashless Claims', path: 'home' },
   { id: 'term-life', label: 'Term Life', category: 'Insurance', icon: Shield, subLabel: 'Secure Family', path: 'home' },
 ];
 
-const POPULAR_SEARCHES = ['Salary Account', 'Fixed Deposit', 'HDFC Bank', 'Credit Score'];
+const POPULAR_SEARCHES = ['Salary Account', 'Fixed Deposit', 'Mutual Funds', 'NPS'];
 const BRANDS = [
-  { name: 'HDFC Bank', logo: new URL("../../logos/Bank Name=HDFC Bank.png", import.meta.url).href },
   { name: 'State Bank of India', logo: new URL("../../logos/Bank Name=State Bank of India.png", import.meta.url).href },
   { name: 'ICICI Bank', logo: new URL("../../logos/Bank Name=ICICI Bank.png", import.meta.url).href },
   { name: 'Kotak Mahindra Bank', logo: new URL("../../logos/Bank Name=Kotak Mahindra Bank.png", import.meta.url).href },
@@ -39,7 +35,9 @@ const BRANDS = [
   { name: 'Bandhan Bank', logo: new URL("../../logos/Bank Name=Bandhan Bank.png", import.meta.url).href },
   { name: 'AU Small Finance Bank', logo: new URL("../../logos/Bank Name=AU Small Finance Bank.png", import.meta.url).href },
   { name: 'RBL Bank', logo: new URL("../../logos/Bank Name=RBL Bank.png", import.meta.url).href },
-  { name: 'Ujjivan Small Finance Bank', logo: new URL("../../logos/Bank Name=Ujjivan Small Finance Bank.png", import.meta.url).href }
+  { name: 'Ujjivan Small Finance Bank', logo: new URL("../../logos/Bank Name=Ujjivan Small Finance Bank.png", import.meta.url).href },
+  // Keep HDFC on the outer ring by placing it last
+  { name: 'HDFC Bank', logo: new URL("../../logos/Bank Name=HDFC Bank.png", import.meta.url).href },
 ];
 
 // --- Components ---
@@ -108,6 +106,9 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
   const [searchResults, setSearchResults] = useState(ALL_PRODUCTS);
   const [userType, setUserType] = useState<'individual' | 'corporate'>('individual');
   const searchRef = useRef<HTMLDivElement>(null);
+  const orbitInnerCount = Math.min(4, Math.ceil(BRANDS.length / 2));
+  const orbitInnerBrands = BRANDS.slice(0, orbitInnerCount);
+  const orbitOuterBrands = BRANDS.slice(orbitInnerCount);
 
   useEffect(() => {
     if (!searchQuery) {
@@ -276,76 +277,92 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
              </div>
 
              {/* Orbit Rings */}
-             <div className="absolute border border-blue-200/60 rounded-full w-[220px] h-[220px] animate-[spin_20s_linear_infinite]" />
-             <div className="absolute border border-indigo-200/40 rounded-full w-[360px] h-[360px] animate-[spin_35s_linear_infinite_reverse]" />
+             <div className="absolute border border-blue-200/60 rounded-full w-[220px] h-[220px]" />
+             <div className="absolute border border-indigo-200/40 rounded-full w-[360px] h-[360px]" />
 
              {/* Inner Orbit Icons */}
-             {BRANDS.slice(0, 4).map((brand, idx) => {
-                const angle = (idx * (360 / 4)) * (Math.PI / 180);
-                const radius = 110; // Half of w-[220px]
-                const x = Math.cos(angle) * radius;
-                const y = Math.sin(angle) * radius;
-                
-                return (
-                   <motion.div
-                      key={brand.name}
-                      className="absolute z-20"
-                      style={{ width: '100%', height: '100%', position: 'absolute', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                   >
-                      <motion.div
-                        whileHover={{ scale: 1.15 }}
-                        className="w-12 h-12 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg border border-white/70 cursor-pointer overflow-hidden"
-                        style={{ transform: `translate(${x}px, ${y}px)` }}
-                        title={brand.name}
-                      >
-                        <motion.img
-                          src={brand.logo}
-                          alt={`${brand.name} logo`}
-                          className="w-8 h-8 object-contain select-none"
-                          animate={{ rotate: -360 }}
-                          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                          draggable={false}
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      </motion.div>
-                   </motion.div>
-                )
-             })}
+             <motion.div
+               className="absolute inset-0"
+               animate={{ rotate: 360 }}
+               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+               style={{ transformOrigin: '50% 50%' }}
+             >
+               {orbitInnerBrands.map((brand, idx) => {
+                  const angle = (idx * (360 / orbitInnerBrands.length)) * (Math.PI / 180);
+                  const radius = 110; // Half of w-[220px]
+                  const x = Math.cos(angle) * radius;
+                  const y = Math.sin(angle) * radius;
+                  
+                  return (
+                     <div
+                        key={brand.name}
+                        className="absolute z-20 left-1/2 top-1/2"
+                        style={{ transform: `translate(-50%, -50%) translate(${x}px, ${y}px)` }}
+                     >
+                        <motion.div
+                          whileHover={{ scale: 1.15 }}
+                          className="w-[58px] h-[58px] rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg border border-white/70 cursor-pointer overflow-hidden"
+                          title={brand.name}
+                        >
+                          {/* Counter-rotate so the logo stays upright while orbiting */}
+                          <motion.img
+                            src={brand.logo}
+                            alt={`${brand.name} logo`}
+                            className="w-[38px] h-[38px] object-contain select-none"
+                            animate={{ rotate: -360 }}
+                            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                            style={{ transformOrigin: '50% 50%' }}
+                            draggable={false}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </motion.div>
+                     </div>
+                  )
+               })}
+             </motion.div>
 
              {/* Outer Orbit Icons */}
-             {BRANDS.slice(4, 9).map((brand, idx) => {
-                const angle = (idx * (360 / 5)) * (Math.PI / 180);
-                const radius = 180; // Half of w-[360px]
-                const x = Math.cos(angle) * radius;
-                const y = Math.sin(angle) * radius;
-                
-                return (
-                   <motion.div
-                      key={brand.name}
-                      className="absolute z-10"
-                      style={{ width: '100%', height: '100%', position: 'absolute', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                   >
-                      <motion.div
-                        whileHover={{ scale: 1.15 }}
-                        className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-md border border-gray-100 cursor-pointer overflow-hidden"
-                        style={{ transform: `translate(${x}px, ${y}px)` }}
-                        title={brand.name}
-                      >
-                        <motion.img
-                          src={brand.logo}
-                          alt={`${brand.name} logo`}
-                          className="w-7 h-7 object-contain select-none"
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
-                          draggable={false}
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      </motion.div>
-                   </motion.div>
-                )
-             })}
+             <motion.div
+               className="absolute inset-0"
+               animate={{ rotate: -360 }}
+               transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+               style={{ transformOrigin: '50% 50%' }}
+             >
+               {orbitOuterBrands.map((brand, idx) => {
+                  const angle = (idx * (360 / orbitOuterBrands.length)) * (Math.PI / 180);
+                  const radius = 180; // Half of w-[360px]
+                  const x = Math.cos(angle) * radius;
+                  const y = Math.sin(angle) * radius;
+                  
+                  return (
+                     <div
+                        key={brand.name}
+                        className="absolute z-10 left-1/2 top-1/2"
+                        style={{ transform: `translate(-50%, -50%) translate(${x}px, ${y}px)` }}
+                     >
+                        <motion.div
+                          whileHover={{ scale: 1.15 }}
+                          className="w-12 h-12 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-md border border-gray-100 cursor-pointer overflow-hidden"
+                          title={brand.name}
+                        >
+                          {/* Counter-rotate so the logo stays upright while orbiting */}
+                          <motion.img
+                            src={brand.logo}
+                            alt={`${brand.name} logo`}
+                            className="w-[34px] h-[34px] object-contain select-none"
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+                            style={{ transformOrigin: '50% 50%' }}
+                            draggable={false}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </motion.div>
+                     </div>
+                  )
+               })}
+             </motion.div>
           </motion.div>
 
         </div>
@@ -379,7 +396,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                        </div>
                        <h3 className="text-2xl font-bold mb-2">Find Your Perfect Salary Account</h3>
                        <p className="text-blue-100 text-sm max-w-md leading-relaxed">
-                         Don't settle for less. Compare exclusive employee benefits, overdraft facilities, and rewards from HDFC, Axis, and SBI.
+                         Don't settle for less. Compare exclusive employee benefits, high interest features, and rewards from HDFC, Axis, and SBI.
                        </p>
                      </div>
                      <div className="mt-6">
@@ -400,16 +417,16 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                  <MobileCarousel>
                    <div className="w-[82vw] max-w-[340px] shrink-0">
                      <ProductCard 
-                       icon={CreditCard} label="Credit Cards" subLabel="Lifetime Free & Cashback" 
-                       colorClass="text-purple-600" bgClass="bg-purple-50"
-                       onClick={() => onNavigate('salary-accounts')} 
+                       icon={TrendingUp} label="Mutual Funds" subLabel="Direct Plans, 0% Comm." 
+                       colorClass="text-emerald-600" bgClass="bg-emerald-50"
+                       onClick={() => onNavigate('investments')} 
                      />
                    </div>
                    <div className="w-[82vw] max-w-[340px] shrink-0">
                      <ProductCard 
-                       icon={Gauge} label="Credit Score" subLabel="Check Report for Free" 
-                       colorClass="text-emerald-600" bgClass="bg-emerald-50"
-                       onClick={() => onNavigate('home')} 
+                       icon={Landmark} label="NPS (Pension)" subLabel="Save Tax up to ₹50k" 
+                       colorClass="text-teal-600" bgClass="bg-teal-50"
+                       onClick={() => onNavigate('investments')} 
                      />
                    </div>
                  </MobileCarousel>
@@ -418,16 +435,16 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                {/* Desktop/tablet: normal grid cards */}
                <div className="hidden sm:block">
                  <ProductCard 
-                   icon={CreditCard} label="Credit Cards" subLabel="Lifetime Free & Cashback" 
-                   colorClass="text-purple-600" bgClass="bg-purple-50"
-                   onClick={() => onNavigate('salary-accounts')} 
+                   icon={TrendingUp} label="Mutual Funds" subLabel="Direct Plans, 0% Comm." 
+                   colorClass="text-emerald-600" bgClass="bg-emerald-50"
+                   onClick={() => onNavigate('investments')} 
                  />
                </div>
                <div className="hidden sm:block">
                  <ProductCard 
-                   icon={Gauge} label="Credit Score" subLabel="Check Report for Free" 
-                   colorClass="text-emerald-600" bgClass="bg-emerald-50"
-                   onClick={() => onNavigate('home')} 
+                   icon={Landmark} label="NPS (Pension)" subLabel="Save Tax up to ₹50k" 
+                   colorClass="text-teal-600" bgClass="bg-teal-50"
+                   onClick={() => onNavigate('investments')} 
                  />
                </div>
             </div>
@@ -500,65 +517,6 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
             </div>
           </motion.div>
 
-          {/* Priority 3: Loans (Need Money?) */}
-          <motion.div
-             initial={{ opacity: 0, y: 20 }}
-             whileInView={{ opacity: 1, y: 0 }}
-             viewport={{ once: true }}
-             transition={{ delay: 0.3 }}
-          >
-             <SectionHeader title="Instant Funds" icon={Banknote} color="bg-orange-500 text-orange-500" />
-             {/* Mobile: swipeable carousel */}
-             <div className="sm:hidden">
-               <MobileCarousel>
-                 <div className="w-[76vw] max-w-[320px] shrink-0">
-                   <ProductCard 
-                     icon={Banknote} label="Personal Loan" subLabel="Approval in 5 mins" 
-                     onClick={() => onNavigate('salary-accounts')} 
-                   />
-                 </div>
-                 <div className="w-[76vw] max-w-[320px] shrink-0">
-                   <ProductCard 
-                     icon={HomeIcon} label="Home Loan" subLabel="Balance Transfer Offers" 
-                     onClick={() => onNavigate('salary-accounts')} 
-                   />
-                 </div>
-                 <div className="w-[76vw] max-w-[320px] shrink-0">
-                   <ProductCard 
-                     icon={Briefcase} label="Business Loan" subLabel="Collateral Free Options" 
-                     onClick={() => onNavigate('salary-accounts')} 
-                   />
-                 </div>
-                 <div className="w-[76vw] max-w-[320px] shrink-0">
-                   <ProductCard 
-                     icon={Car} label="Car Loan" subLabel="Up to 100% On-Road Funding" 
-                     onClick={() => onNavigate('salary-accounts')} 
-                   />
-                 </div>
-               </MobileCarousel>
-             </div>
-
-             {/* Desktop/tablet grid */}
-             <div className="hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-6">
-               <ProductCard 
-                 icon={Banknote} label="Personal Loan" subLabel="Approval in 5 mins" 
-                 onClick={() => onNavigate('salary-accounts')} 
-               />
-               <ProductCard 
-                 icon={HomeIcon} label="Home Loan" subLabel="Balance Transfer Offers" 
-                 onClick={() => onNavigate('salary-accounts')} 
-               />
-               <ProductCard 
-                 icon={Briefcase} label="Business Loan" subLabel="Collateral Free Options" 
-                 onClick={() => onNavigate('salary-accounts')} 
-               />
-               <ProductCard 
-                 icon={Car} label="Car Loan" subLabel="Up to 100% On-Road Funding" 
-                 onClick={() => onNavigate('salary-accounts')} 
-               />
-             </div>
-          </motion.div>
-
         </section>
       ) : (
         /* Corporate View */
@@ -575,9 +533,9 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
 
                <div className="flex-1 space-y-6 relative z-10">
                   <Badge className="bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border-indigo-200 px-3 py-1">Corporate Portal</Badge>
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">Empower Your Workforce with Financial Wellness</h2>
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">Launch Group Investments for Your Workforce</h2>
                   <p className="text-gray-500 text-lg leading-relaxed">
-                    A unified dashboard to manage salary disbursements, employee benefits, and group insurance policies. Reduce admin overhead by 40%.
+                    A unified dashboard to manage salary disbursements and roll out employee wealth programs like Corporate NPS and group investment benefits. Reduce admin overhead by 40%.
                   </p>
                   
                   <div className="space-y-4 pt-4">
@@ -592,17 +550,17 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                          <div className="p-2.5 rounded-xl bg-blue-50 text-blue-600 shadow-sm"><TrendingUp className="w-6 h-6" /></div>
                          <div>
                             <p className="font-bold text-gray-900 text-lg">Group Investments</p>
-                            <p className="text-sm text-gray-500">Corporate NPS & FD benefits</p>
+                            <p className="text-sm text-gray-500">Corporate NPS, group FDs & employee investment benefits</p>
                          </div>
                       </div>
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-4 pt-6">
-                     <Button onClick={() => onNavigate('corporate')} className="bg-indigo-600 hover:bg-indigo-700 h-12 px-8 text-base shadow-lg shadow-indigo-600/20 transition-all hover:scale-105">
-                        Login to Portal
-                     </Button>
-                     <Button variant="outline" className="h-12 px-8 border-gray-300 text-gray-700 hover:bg-white/50 bg-white/30 backdrop-blur-sm">
-                        Schedule Demo
+                     <Button
+                       onClick={() => goToAuthLink("corporateLogin")}
+                       className="bg-indigo-600 hover:bg-indigo-700 h-12 px-8 text-base shadow-lg shadow-indigo-600/20 transition-all hover:scale-105"
+                     >
+                        Corporate Login
                      </Button>
                   </div>
                </div>
