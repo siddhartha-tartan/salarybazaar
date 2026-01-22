@@ -4,6 +4,23 @@ import { Badge } from "@/components/ui/badge";
 import { Check, Filter, Star, ChevronDown, Building2, TrendingUp, PiggyBank, ShieldCheck, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const BANK_LOGOS: Record<string, string> = {
+  "HDFC Bank": new URL("../../logos/Bank Name=HDFC Bank.png", import.meta.url).href,
+  "ICICI Bank": new URL("../../logos/Bank Name=ICICI Bank.png", import.meta.url).href,
+  "SBI": new URL("../../logos/Bank Name=State Bank of India.png", import.meta.url).href,
+  "Kotak Mahindra Bank": new URL("../../logos/Bank Name=Kotak Mahindra Bank.png", import.meta.url).href,
+  "Union Bank": new URL("../../logos/Bank Name=Union Bank.png", import.meta.url).href,
+  "RBL Bank": new URL("../../logos/Bank Name=RBL Bank.png", import.meta.url).href,
+  "Bandhan Bank": new URL("../../logos/Bank Name=Bandhan Bank.png", import.meta.url).href,
+  "Central Bank of India": new URL("../../logos/Bank Name=Central Bank of India.png", import.meta.url).href,
+  "Ujjivan Small Finance Bank": new URL("../../logos/Bank Name=Ujjivan Small Finance Bank.png", import.meta.url).href,
+  "AU Small Finance Bank": new URL("../../logos/Bank Name=AU Small Finance Bank.png", import.meta.url).href,
+};
+
+function getBankLogo(bank: string): string | undefined {
+  return BANK_LOGOS[bank];
+}
+
 interface ProductListingProps {
   category: 'salary-accounts' | 'investments';
   onNavigate: (page: string) => void;
@@ -37,10 +54,10 @@ const SALARY_PRODUCTS = [
     id: 'sbi-corp',
     bank: 'SBI',
     name: 'Corporate Salary Package',
-    tags: ['Govt. Preferred', 'Low Loan Rates'],
+    tags: ['Govt. Preferred', 'Wide Network'],
     interest: '2.7% - 3.0%',
     minBalance: '₹0 (Zero Balance)',
-    benefits: ['Overdraft Facility', 'Locker Discount', 'Zero Processing Fee on Loans'],
+    benefits: ['Free Debit Card', 'Locker Discount', '24x7 Mobile Banking'],
     logo: 'S',
     color: 'bg-blue-500'
   }
@@ -99,7 +116,7 @@ export const ProductListing: React.FC<ProductListingProps> = ({ category, onNavi
           <div>
              <label className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3 block">Features</label>
              <div className="space-y-2">
-                {['Zero Balance', 'Free Credit Card', 'Cashback', 'Lounge Access'].map(feat => (
+                {['Zero Balance', 'Debit Card Benefits', 'Cashback', 'Lounge Access'].map(feat => (
                   <label key={feat} className="flex items-center gap-2 text-sm text-gray-700 hover:text-blue-600 cursor-pointer">
                      <input type="checkbox" className="rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
                      {feat}
@@ -207,8 +224,19 @@ export const ProductListing: React.FC<ProductListingProps> = ({ category, onNavi
 
                  {/* Left: Logo & Basic Info */}
                  <div className="flex-1 flex gap-4">
-                    <div className={`w-14 h-14 rounded-xl ${product.color || 'bg-gray-900'} text-white flex items-center justify-center text-xl font-bold flex-shrink-0 shadow-md`}>
-                       {product.logo}
+                    <div className={`w-14 h-14 rounded-xl ${product.color || 'bg-gray-900'} text-white flex items-center justify-center text-xl font-bold flex-shrink-0 shadow-md overflow-hidden`}>
+                       {getBankLogo(product.bank) ? (
+                         <div className="w-full h-full bg-white flex items-center justify-center">
+                           <img
+                             src={getBankLogo(product.bank)}
+                             alt={`${product.bank} logo`}
+                             className="w-full h-full object-contain p-2"
+                             loading="lazy"
+                           />
+                         </div>
+                       ) : (
+                         product.logo
+                       )}
                     </div>
                     <div>
                        <div className="flex flex-wrap gap-2 mb-1">

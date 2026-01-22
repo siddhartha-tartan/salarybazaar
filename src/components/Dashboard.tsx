@@ -9,14 +9,31 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const PROVIDER_LOGOS: Record<string, string> = {
+  "HDFC Bank": new URL("../../logos/Bank Name=HDFC Bank.png", import.meta.url).href,
+  "ICICI Bank": new URL("../../logos/Bank Name=ICICI Bank.png", import.meta.url).href,
+  "SBI": new URL("../../logos/Bank Name=State Bank of India.png", import.meta.url).href,
+  "Kotak Mahindra": new URL("../../logos/Bank Name=Kotak Mahindra Bank.png", import.meta.url).href,
+  "Union Bank": new URL("../../logos/Bank Name=Union Bank.png", import.meta.url).href,
+  "RBL Bank": new URL("../../logos/Bank Name=RBL Bank.png", import.meta.url).href,
+  "Bandhan Bank": new URL("../../logos/Bank Name=Bandhan Bank.png", import.meta.url).href,
+  "Central Bank of India": new URL("../../logos/Bank Name=Central Bank of India.png", import.meta.url).href,
+  "Ujjivan Small Finance Bank": new URL("../../logos/Bank Name=Ujjivan Small Finance Bank.png", import.meta.url).href,
+  "AU Small Finance Bank": new URL("../../logos/Bank Name=AU Small Finance Bank.png", import.meta.url).href,
+};
+
+function getProviderLogo(provider: string): string | undefined {
+  return PROVIDER_LOGOS[provider];
+}
+
 interface MarketplaceProps {
   onNavigate: (page: string) => void;
-  initialCategory?: string; // 'all', 'salary-accounts', 'investments', 'loans'
+  initialCategory?: string; // 'all', 'salary-accounts', 'investments'
 }
 
 interface Product {
   id: string;
-  category: 'salary-account' | 'investment' | 'loan' | 'card';
+  category: 'salary-account' | 'investment';
   title: string;
   provider: string;
   description: string;
@@ -58,7 +75,7 @@ const PRODUCTS: Product[] = [
     title: 'Corporate Salary Package',
     provider: 'SBI',
     description: 'Trusted by millions, wide network of branches.',
-    features: ['Overdraft facility', 'Low interest loans', 'Free insurance'],
+    features: ['Wide Branch Network', 'Digital Banking', 'Free Insurance'],
     ctaLink: '#',
     rating: 4.6,
     tags: ['Govt Backed']
@@ -69,7 +86,7 @@ const PRODUCTS: Product[] = [
     title: 'Salary Plus Account',
     provider: 'ICICI Bank',
     description: 'Premium salary account with family banking benefits.',
-    features: ['No Min Balance', 'Free Credit Card', 'Wealth Management'],
+    features: ['No Min Balance', 'Family Banking', 'Wealth Management'],
     ctaLink: '#',
     rating: 4.7,
     tags: ['Family Banking']
@@ -131,67 +148,6 @@ const PRODUCTS: Product[] = [
     ctaLink: '#',
     rating: 4.6,
     tags: ['Mutual Fund', 'High Growth']
-  },
-  
-  // Loans
-  {
-    id: 'hdfc-pl',
-    category: 'loan',
-    title: 'Instant Personal Loan',
-    provider: 'HDFC Bank',
-    description: 'Pre-approved personal loan for salary account holders.',
-    features: ['Disbursal in 10s', 'Interest from 10.5%', 'Minimal Docs'],
-    ctaLink: '#',
-    rating: 4.5,
-    highlight: 'Fastest Approval',
-    tags: ['Instant', 'Paperless']
-  },
-  {
-    id: 'sbi-hl',
-    category: 'loan',
-    title: 'SBI Home Loan',
-    provider: 'SBI',
-    description: 'Lowest interest rates for home loans with no hidden charges.',
-    features: ['Low Interest', 'No Prepayment Penalty', 'Overdraft Option'],
-    ctaLink: '#',
-    rating: 4.7,
-    tags: ['Low Interest']
-  },
-  {
-    id: 'bajaj-pl',
-    category: 'loan',
-    title: 'Flexi Personal Loan',
-    provider: 'Bajaj Finserv',
-    description: 'Withdraw as you need and pay interest only on used amount.',
-    features: ['Flexi Facility', 'Instant Approval', 'Online Process'],
-    ctaLink: '#',
-    rating: 4.4,
-    tags: ['Flexible']
-  },
-
-  // Cards
-  {
-    id: 'hdfc-regalia',
-    category: 'card',
-    title: 'Regalia Gold Credit Card',
-    provider: 'HDFC Bank',
-    description: 'Premium travel and lifestyle benefits with lounge access.',
-    features: ['Lounge Access', 'Rewards Points', 'Travel Insurance'],
-    ctaLink: '#',
-    rating: 4.8,
-    highlight: 'Premium',
-    tags: ['Travel', 'Luxury']
-  },
-  {
-    id: 'axis-ace',
-    category: 'card',
-    title: 'ACE Credit Card',
-    provider: 'Axis Bank',
-    description: 'Highest cashback on utility bill payments and food delivery.',
-    features: ['5% Cashback', 'No Annual Fee', 'Dining Delights'],
-    ctaLink: '#',
-    rating: 4.6,
-    tags: ['Cashback']
   }
 ];
 
@@ -227,8 +183,6 @@ export const Dashboard: React.FC<MarketplaceProps> = ({ initialCategory = 'all',
     switch(cat) {
       case 'salary-account': return <Building2 className="w-5 h-5 text-blue-600" />;
       case 'investment': return <TrendingUp className="w-5 h-5 text-green-600" />;
-      case 'loan': return <Briefcase className="w-5 h-5 text-orange-600" />;
-      case 'card': return <CreditCard className="w-5 h-5 text-purple-600" />;
       default: return <Building2 className="w-5 h-5 text-blue-600" />;
     }
   };
@@ -249,9 +203,7 @@ export const Dashboard: React.FC<MarketplaceProps> = ({ initialCategory = 'all',
             {[
               { id: 'all', label: 'All Products' },
               { id: 'salary-account', label: 'Salary Accounts' },
-              { id: 'investment', label: 'Investments' },
-              { id: 'loan', label: 'Loans' },
-              { id: 'card', label: 'Credit Cards' }
+              { id: 'investment', label: 'Investments' }
             ].map((cat) => (
               <button
                 key={cat.id}
@@ -392,8 +344,17 @@ export const Dashboard: React.FC<MarketplaceProps> = ({ initialCategory = 'all',
                      className="glass bg-white/40 border border-white/60 rounded-3xl p-5 flex flex-col items-start group cursor-pointer h-full relative hover:bg-white/60 hover:shadow-xl transition-all duration-300"
                    >
                       <div className="flex justify-between items-start w-full mb-3">
-                         <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm">
-                            {getCategoryIcon(product.category)}
+                         <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm overflow-hidden">
+                            {getProviderLogo(product.provider) ? (
+                              <img
+                                src={getProviderLogo(product.provider)}
+                                alt={`${product.provider} logo`}
+                                className="w-full h-full object-contain p-1.5"
+                                loading="lazy"
+                              />
+                            ) : (
+                              getCategoryIcon(product.category)
+                            )}
                          </div>
                          <div className="flex items-center gap-1 bg-white/50 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-bold text-gray-700 border border-white/50">
                             {product.rating} <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
